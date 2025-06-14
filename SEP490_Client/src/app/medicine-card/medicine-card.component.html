@@ -1,0 +1,199 @@
+<app-header></app-header>
+<app-left-menu></app-left-menu>
+<main id="main" class="main">
+  <section class="section min-height-740">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <form class="row g-3">
+                <div class="col-md-2">
+                  <div class="form-floating">
+                    <input
+                      #appoinmentId
+                      type="text"
+                      class="form-control"
+                      placeholder="Mã lịch khám"
+                      autocomplete="off"
+                      value=""
+                    />
+                    <label>Mã lịch khám</label>
+                  </div>
+                </div>
+                <div class="col-lg-5">
+                  <button (click)="search()" type="button" class="btn fhc-button">
+                    <i class="bx bx-search-alt-2 me-1"></i> Tìm kiếm
+                  </button>
+                  <button *ngIf="role == '5'"
+                    type="button"
+                    class="btn fhc-button ml-5"
+                    (click)="updateCard()"
+                    [disabled]="!this.isShowResult"
+                  >
+                    <i class="bi bi-patch-plus me-1"></i> Lấy thuốc
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="isShowResult" class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-3 mg-top-20">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-center py-4">
+                      <a href="#" class="logo d-flex align-items-center w-auto">
+                        <img src="assets/img/logo.png" alt="" />
+                        <span class="d-none d-lg-block">FPT Hospital Care</span>
+                      </a>
+                    </div>
+                    <hr />
+                    <ng-container>
+                      <div class="row label-2">
+                        <div class="col-lg-4 col-md-4 label">Mã lịch khám:</div>
+                        <div class="col-lg-8 col-md-8">
+                          {{ prescriptionCardModel.appoinmentId }}
+                        </div>
+                      </div>
+                      <div class="row label-2">
+                        <div class="col-lg-4 col-md-4 label">Bệnh nhân:</div>
+                        <div class="col-lg-8 col-md-8">
+                          {{ prescriptionCardModel.patientName }}
+                        </div>
+                      </div>
+                      <div class="row label-2">
+                        <div class="col-lg-4 col-md-4 label">Bác sĩ:</div>
+                        <div class="col-lg-8 col-md-8">
+                          {{ prescriptionCardModel.doctorName }}
+                        </div>
+                      </div>
+                      <div class="row label-2">
+                        <div class="col-lg-4 col-md-4 label">Ghi chú:</div>
+                        <div class="col-lg-8 col-md-8">
+                          {{ prescriptionCardModel.note }}
+                        </div>
+                      </div>
+                      <div class="row label-2">
+                        <div class="col-lg-4 col-md-4 label">Số ngày uống:</div>
+                        <div class="col-lg-8 col-md-8">
+                          {{ prescriptionCardModel.numOfDay }} ngày
+                        </div>
+                      </div>
+                      <div class="row label-2">
+                        <div class="col-lg-4 col-md-4 label">Ngày tạo:</div>
+                        <div class="col-lg-8 col-md-8">
+                          {{ prescriptionCardModel.createAt }}
+                        </div>
+                      </div>
+                      <div class="row label-2">
+                        <div class="col-lg-4 col-md-4 label">Trạng thái:</div>
+                        <div class="col-lg-8 col-md-8">
+                          {{ prescriptionCardModel.status }}
+                        </div>
+                      </div>
+                    </ng-container>
+                    <hr />
+                    <div class="col-12 text-center">
+                      <p class="small mb-0">
+                        Hãy chọn thuốc và số lượng giống như danh sách bênh
+                        cạnh.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-9 mg-top-20">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-center py-4">
+                      <a href="#" class="logo d-flex align-items-center w-auto">
+                        <img src="assets/img/logo.png" alt="" />
+                        <span class="d-none d-lg-block">FPT Hospital Care</span>
+                      </a>
+                    </div>
+                    <hr />
+                    <ng-container>
+                      <ul class="list-group">
+                        <li
+                          *ngFor="let m of medicineModelListDisplay"
+                          class="list-group-item d-flex justify-content-between align-items-center"
+                        >
+                          {{ m.name }}
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="form-floating">
+                                <input
+                                  #note
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="Ghi chú"
+                                  autocomplete="off"
+                                  value="{{ m.note }}"
+                                  disabled
+                                />
+                                <label>Ghi chú</label>
+                              </div>
+                            </div>
+                            <div class="col-md-2">
+                              <div class="form-floating">
+                                <input
+                                  #quantity
+                                  (change)="updateQuantity(m.medicineId)"
+                                  type="number"
+                                  class="form-control"
+                                  placeholder="Số lượng"
+                                  autocomplete="off"
+                                  value="{{ m.quantity }}"
+                                  min="0"
+                                  [disabled]=" role != '5'"
+                                />
+                                <label>Số lượng</label>
+                              </div>
+                            </div>
+                            <div *ngIf="role == '5'" class="col-md-2">
+                              <div class="form-floating">
+                                <input
+                                  #totalQuantity
+                                  type="number"
+                                  class="form-control"
+                                  placeholder="Số lượng"
+                                  autocomplete="off"
+                                  value="{{ m.totalQuantityDisplay }}"
+                                  disabled
+                                />
+                                <label>Tổng số lượng</label>
+                              </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-floating">
+                                    <input
+                                      type="number"
+                                      class="form-control"
+                                      placeholder="Đơn vị"
+                                      autocomplete="off"
+                                      value=""
+                                      disabled
+                                    />
+                                    <label>{{ m.unit }}</label>
+                                  </div>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<app-footer></app-footer>

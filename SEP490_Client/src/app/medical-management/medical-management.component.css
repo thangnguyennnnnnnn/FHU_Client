@@ -1,0 +1,24 @@
+.img-medicine {
+    max-width: 100px;
+    max-height: 100px;
+    min-width: 100px;
+    min-height: 100px;
+}
+
+.div-img {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}
+
+.fhc-img-2 {
+    max-width: 300px;
+    max-height: 300px;
+    min-height: 300px;
+    min-width: 300px;
+}
+
+.fhc-search-report {
+    max-height: 300px;
+    overflow: auto;
+}

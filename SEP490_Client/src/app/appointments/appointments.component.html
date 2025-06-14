@@ -1,0 +1,115 @@
+<app-header></app-header>
+<app-left-menu></app-left-menu>
+<main id="main" class="main">
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">FHC Lịch Khám</h5>
+            <!-- Table with stripped rows -->
+            <div *ngIf="isNoData" class="datatable-wrapper">
+              <div class="datatable-top">
+                <div class="datatable-dropdown">
+                  <label>
+                    <select class="datatable-selector">
+                      <option value="5">5</option>
+                      <option value="10" selected>10</option>
+                      <option value="15">15</option>
+                      <option value="20">20</option>
+                      <option value="25">25</option>
+                    </select>
+                    bản ghi / trang
+                  </label>
+                </div>
+                <div class="datatable-search">
+                  <input
+                    class="datatable-input"
+                    type="search"
+                    title="Search within table"
+                    placeholder="Tìm kiếm..."
+                  />
+                </div>
+              </div>
+              <div class="datatable-container">
+                <table class="table table-striped datatable-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Tên</th>
+                      <th scope="col">Địa chỉ</th>
+                      <th scope="col">Số điện thoại</th>
+                      <th scope="col">Khám bệnh</th>
+                      <th scope="col">Ngày khám</th>
+                      <th scope="col">Giờ khám</th>
+                      <th scope="col">Chi tiết</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let ap of appoinmentList">
+                      <th scope="row">{{ ap.appointmentBeforId }}</th>
+                      <td>{{ ap.fullname }}</td>
+                      <td>{{ ap.address }}</td>
+                      <td>{{ ap.phone }}</td>
+                      <td>{{ ap.facultyName }}</td>
+                      <td>{{ ap.examinationDate }}</td>
+                      <td>{{ ap.examinationTime }}</td>
+                      <td>
+                        <button
+                          (click)="getDetail(ap.appointmentBeforId)"
+                          type="button"
+                          class="btn fhc-button rounded-pill"
+                        >
+                          Chi tiết
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="datatable-bottom">
+                <div class="datatable-info">Showing 1 to 5 of 20 entries</div>
+                <nav class="datatable-pagination">
+                  <ul class="datatable-pagination-list">
+                    <li
+                      class="datatable-pagination-list-item datatable-hidden datatable-disabled"
+                    >
+                      <a class="datatable-pagination-list-item-link">‹</a>
+                    </li>
+                    <li class="datatable-pagination-list-item datatable-active">
+                      <a class="datatable-pagination-list-item-link">1</a>
+                    </li>
+                    <li class="datatable-pagination-list-item">
+                      <a class="datatable-pagination-list-item-link">2</a>
+                    </li>
+                    <li class="datatable-pagination-list-item">
+                      <a class="datatable-pagination-list-item-link">3</a>
+                    </li>
+                    <li class="datatable-pagination-list-item">
+                      <a class="datatable-pagination-list-item-link">4</a>
+                    </li>
+                    <li class="datatable-pagination-list-item">
+                      <a class="datatable-pagination-list-item-link">›</a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+            <div *ngIf="!isNoData">
+              <h5 class="card-title">Bạn chưa đăng ký lịch khám tại đây!</h5>
+              <h6>Nếu bạn muốn đăng ký hãy nhấn nút bên dưới</h6>
+              <a
+                href="dang-ky-lich-kham"
+                type="button"
+                class="btn fhc-button mb-2"
+              >
+                Đăng ký
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<app-footer></app-footer>

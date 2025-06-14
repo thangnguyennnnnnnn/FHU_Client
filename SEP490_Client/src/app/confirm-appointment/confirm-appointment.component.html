@@ -1,0 +1,240 @@
+<app-header></app-header>
+<app-left-menu></app-left-menu>
+<main id="main" class="main">
+    <section class="section">
+        <div class="row">
+          <div class="col-lg-8">
+  
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Xác nhận thông tin </h5>
+                <hr>
+                <form class="row g-3">
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <input
+                        #fullname
+                        type="text"
+                        class="form-control"
+                        id="fullname"
+                        placeholder="Bệnh nhân"
+                        autocomplete="off"
+                      />
+                      <label for="fullname">Bệnh nhân</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <input
+                        #phone
+                        type="text"
+                        class="form-control"
+                        id="phone"
+                        placeholder="Số điện thoại"
+                        autocomplete="off"
+                      />
+                      <label for="phone">Số điện thoại</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <input
+                        #address
+                        type="text"
+                        class="form-control"
+                        id="address"
+                        placeholder="Số điện thoại"
+                        autocomplete="off"
+                      />
+                      <label for="address">Địa chỉ</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <select (change)="changeBuilding()" #buildingId class="form-select" aria-label="Default select example">
+                        <option value="">Chưa chọn</option>
+                        <option *ngFor="let b of buildingList" value="{{ b.buildingId }}">
+                          {{ b.buildingName }} - {{b.buildingAddress}}
+                        </option>
+                      </select>
+                      <label for="buildingId">Địa chỉ</label>
+                    </div>
+                  </div>
+                  <ng-container *ngIf="isBuildingSelected">
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <select (change)="medicalExaminationTimeChangeCheck()" #facultyId class="form-select" aria-label="Default select example">
+                          <option selected value="" >Vui lòng chọn 1</option>
+                          <option *ngFor="let spec of specializationModelList" value="{{spec.id}}">{{spec.name}}</option>
+                        </select>
+                        <label for="facultyId">Hình thức khám</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <input (change)="medicalExaminationTimeChangeCheck()" #examinationDate type="date" class="form-control" [min]="currentDate">
+                        <label for="examinationDate">Ngày khám</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <select (change)="medicalExaminationTimeChange()" #examinationTime class="form-select" aria-label="Default select example">
+                          <option selected value="">Vui lòng chọn 1</option>
+                          <option value="8:00 - 9:00 (AM)">8:00 - 9:00 (Ca sáng)</option>
+                          <option value="9:00 - 10:00 (AM)">9:00 - 10:00 (Ca sáng)</option>
+                          <option value="10:00 - 11:00 (AM)">10:00 - 11:00 (Ca sáng)</option>
+                          <option value="11:00 - 12:00 (AM)">11:00 - 12:00 (Ca sáng)</option>
+                          <option value="13:00 - 14:00 (PM)">13:00 - 14:00 (Ca chiều)</option>
+                          <option value="14:00 - 15:00 (PM)">14:00 - 15:00 (Ca chiều)</option>
+                          <option value="15:00 - 16:00 (PM)">15:00 - 16:00 (Ca chiều)</option>
+                          <option value="16:00 - 17:00 (PM)">16:00 - 17:00 (Ca chiều)</option>
+                        </select>
+                        <label for="examinationTime">Khung giờ khám</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <select (change)="doctorChange()" #doctorId class="form-select" aria-label="Default select example">
+                          <option selected value="">Vui lòng chọn 1</option>
+                          <option *ngIf="!haveDoctor" value="">Các bác sĩ đều bận trong khung giờ này</option>
+                          <option *ngFor="let doc of doctorDisplayList" value="{{doc.userId}}">{{doc.fullname}}</option>
+                        </select>
+                        <label for="doctorId">Danh sách các bác sĩ</label>
+                      </div>
+                    </div>
+                    <div *ngIf="haveDoctor" class="col-md-12">
+                      <div class="form-floating">
+                        <textarea #symptom class="form-control" style="height: 100px"></textarea>
+                        <label for="symptom">Triệu chứng bệnh</label>
+                      </div>
+                    </div>
+                    <div *ngIf="isInfoDoctor" class="card mb-3">
+                      <div class="row g-0">
+                        <div class="col-md-3">
+                          <img src="{{DoctorDisplay.urlAvata}}" class="img-fluid rounded-start fullsize-img" alt="...">
+                        </div>
+                        <div class="col-md-9">
+                          <div class="card-body">
+                            <h5 class="card-title">Bác sĩ: {{DoctorDisplay.fullname}}</h5>
+                            <ul class="list-group">
+                              <li class="list-group-item"><i class="bi bi-star me-1 text-success"></i> {{DoctorDisplay.birthdate}}</li>
+                              <li class="list-group-item"><i class="ri ri-phone-line me-1 text-success"></i> {{DoctorDisplay.phone}}</li>
+                              <li class="list-group-item"><i class="ri ri-at-line me-1 text-success"></i> {{DoctorDisplay.email}}</li>
+                            </ul>
+                            <h3 class="card-title">Các khoa làm việc</h3>
+                            <ul class="list-group">
+                              <li *ngFor="let faculty of facultyList" class="list-group-item"><i class="bi bi-vinyl-fill me-1 text-success"></i> {{faculty.name}} - {{faculty.description}}</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-container>
+                  <br>
+                  <h5 class="card-title">Thông tin người nhà </h5>
+                  <hr>
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <input #fullnameNT type="text" class="form-control">
+                      <label for="fullnameNT">Người nhà</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <input #phoneNT type="text" class="form-control">
+                      <label for="phoneNT">Số điện thoại(Người thân)</label>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-floating">
+                      <input #addressNT type="text" class="form-control">
+                      <label for="addressNT">Địa chỉ(Người thân)</label>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row mb-3 text-center">
+                    <div class="col-sm-12">
+                      <button (click)="confirm()" type="submit" class="btn fhc-button">Xác nhận thông tin</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+  
+          </div>
+  
+          <div class="col-lg-4">
+            <div #cardInfo class="card">
+              <div class="card-body">
+                <h1 class="card-title-2 text-center">Thông tin thẻ khám </h1>
+                <hr>
+                <div class="d-flex justify-content-center py-4">
+                  <a href="#" class="logo d-flex align-items-center w-auto">
+                    <img src="assets/img/logo.png" alt="">
+                    <span class="d-none d-lg-block">FPT Hospital Care</span>
+                  </a>
+                </div>
+                <ng-container *ngIf="isConfirm">
+                  <div class="row label-2">
+                    <div class="col-lg-4 col-md-4 label">Bệnh nhân:</div>
+                    <div class="col-lg-8 col-md-8">
+                      {{ appointmentModelDB.fullname }}
+                    </div>
+                  </div>
+                  <div class="row label-2">
+                    <div class="col-lg-4 col-md-4 label">Điện thoại:</div>
+                    <div class="col-lg-8 col-md-8">{{ appointmentModelDB.phone }}</div>
+                  </div>
+                  <div class="row label-2">
+                    <div class="col-lg-4 col-md-4 label">Đ.thoại (NN):</div>
+                    <div class="col-lg-8 col-md-8">
+                      {{ appointmentModelDB.phoneNT }}
+                    </div>
+                  </div>
+                  <div class="row label-2">
+                    <div class="col-lg-4 col-md-4 label">Địa chỉ:</div>
+                    <div class="col-lg-8 col-md-8">
+                      {{ appointmentModelDB.address }}
+                    </div>
+                  </div>
+                  <div class="row label-2">
+                    <div class="col-lg-4 col-md-4 label">Loại khám:</div>
+                    <div class="col-lg-8 col-md-8">
+                      {{ appointmentModelDB.facultyName }}
+                    </div>
+                  </div>
+                  <div class="row label-2">
+                    <div class="col-lg-4 col-md-4 label">Ngày khám:</div>
+                    <div class="col-lg-8 col-md-8">
+                      {{ appointmentModelDB.examinationDate }}
+                    </div>
+                  </div>
+                  <div class="row label-2">
+                    <div class="col-lg-4 col-md-4 label">Giờ khám:</div>
+                    <div class="col-lg-8 col-md-8">
+                      {{ appointmentModelDB.examinationTime }}
+                    </div>
+                  </div>
+                  <div class="row label-2">
+                    <div class="col-lg-4 col-md-4 label">Bác sĩ:</div>
+                    <div class="col-lg-8 col-md-8">
+                      {{ appointmentModelDB.doctorName }}
+                    </div>
+                  </div>
+                </ng-container>
+                <hr>
+                <div class="col-12 text-center">
+                  <p class="small mb-0">Vui lòng đến trước 30 phút để có thể chuẩn bị tốt nhất. Nếu khẩn cấp vui lòng liên hệ hotline: 0386993897</p>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="isOK" class="row mb-3 text-center">
+              <div class="col-sm-12">
+                <button (click)="registerAppointment()" type="submit" class="btn fhc-button">Đăng ký</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+</main>
+<app-footer></app-footer>

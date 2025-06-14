@@ -1,0 +1,253 @@
+<app-header></app-header>
+<app-left-menu></app-left-menu>
+<main id="main" class="main">
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div></div>
+                        <form class="row g-3 needs-validation" novalidate>
+                            <h5 class="card-title">Đăng ký khám bệnh - Thông tin bệnh nhân </h5>
+                            <div class="col-md-12">
+                              <div class="form-floating">
+                                <input
+                                  #fullname
+                                  type="text"
+                                  class="form-control"
+                                  id="fullname"
+                                  placeholder="Họ và tên bệnh nhân"
+                                  autocomplete="off"
+                                />
+                                <label for="fullname">Họ và tên bệnh nhân</label>
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="form-floating">
+                                <input
+                                  #phone
+                                  type="text"
+                                  class="form-control"
+                                  id="phone"
+                                  placeholder="Số điện thoại"
+                                  autocomplete="off"
+                                />
+                                <label for="phone">Số điện thoại</label>
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="row">
+                                <div class="col-md-3">
+                                  <div class="form-floating">
+                                    <select
+                                      class="form-select"
+                                      id="country"
+                                      aria-label="Tỉnh - Thành Phố"
+                                      #country
+                                      value="{{item}}"
+                                      (change)="countryChange(1)"
+                                    >
+                                      <option value="">Chưa chọn</option>
+                                      <option *ngFor="let p of listCountry" value="{{p.id}}">{{p.name}}</option>
+                                    </select>
+                                    <label for="country">Quốc gia</label>
+                                  </div>
+                                </div>
+                                <div class="col-md-3">
+                                  <div class="form-floating mb-3">
+                                    <select
+                                      class="form-select"
+                                      id="provide"
+                                      aria-label="Tỉnh - Thành Phố"
+                                      (change)="provideChange(1)"
+                                      #provide
+                                    >
+                                      <option value="">Chưa chọn</option>
+                                      <option *ngFor="let p of listProvide" value="{{p.id}}">{{p.name}}</option>
+                                    </select>
+                                    <label for="provide">Tỉnh - Thành Phố</label>
+                                  </div> 
+                                </div>
+                                <div class="col-md-3">
+                                  <div class="form-floating mb-3">
+                                    <select
+                                      class="form-select"
+                                      id="district"
+                                      aria-label="Quận - Huyện"
+                                      #district
+                                      (change)="districtChange(1)"
+                                    >
+                                      <option value="">Chưa chọn</option>
+                                      <option *ngFor="let d of listDistrict" value="{{d.id}}">{{d.name}}</option>
+                                    </select>
+                                    <label for="district">Quận - Huyện</label>
+                                  </div> 
+                                </div>
+                                <div class="col-md-3">
+                                  <div class="form-floating mb-3">
+                                    <select
+                                      class="form-select"
+                                      id="ward"
+                                      aria-label="Phường - Xã"
+                                      #ward
+                                    >
+                                      <option value="">Chưa chọn</option>
+                                      <option *ngFor="let w of listWard" value="{{w.id}}">{{w.name}}</option>
+                                    </select>
+                                    <label for="ward">Phường - Xã</label>
+                                  </div> 
+                                </div>
+                              </div>
+                            </div>
+                            <hr>
+                            <h5 class="card-title">Thông tin người thân </h5>
+                            <div class="col-md-6">
+                              <div class="form-floating">
+                                <input
+                                  #fullnameNT
+                                  type="text"
+                                  class="form-control"
+                                  id="fullnameNT"
+                                  placeholder="Họ và tên"
+                                  autocomplete="off"
+                                />
+                                <label for="fullnameNT">Họ và tên</label>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-floating">
+                                <input
+                                  #phoneNT
+                                  type="text"
+                                  class="form-control"
+                                  id="phoneNT"
+                                  placeholder="Số điện thoại"
+                                  autocomplete="off"
+                                />
+                                <label for="phoneNT">Số điện thoại</label>
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="row">
+                                <div class="col-md-3">
+                                  <div class="form-floating">
+                                    <select
+                                      class="form-select"
+                                      id="country2"
+                                      aria-label="Tỉnh - Thành Phố"
+                                      #country2
+                                      (change)="countryChange(2)"
+                                    >
+                                      <option value="">Chưa chọn</option>
+                                      <option *ngFor="let p of listCountry" value="{{p.id}}">{{p.name}}</option>
+                                    </select>
+                                    <label for="country2">Quốc gia</label>
+                                  </div>
+                                </div>
+                                <div class="col-md-3">
+                                  <div class="form-floating mb-3">
+                                    <select
+                                      class="form-select"
+                                      id="provide2"
+                                      aria-label="Tỉnh - Thành Phố"
+                                      #provide2
+                                      (change)="provideChange(2)"
+                                    >
+                                      <option value="">Chưa chọn</option>
+                                      <option *ngFor="let p of listProvide2" value="{{p.id}}">{{p.name}}</option>
+                                    </select>
+                                    <label for="provide2">Tỉnh - Thành Phố</label>
+                                  </div> 
+                                </div>
+                                <div class="col-md-3">
+                                  <div class="form-floating mb-3">
+                                    <select
+                                      class="form-select"
+                                      id="district2"
+                                      aria-label="Quận - Huyện"
+                                      #district2
+                                      (change)="districtChange(2)"
+                                    >
+                                      <option value="">Chưa chọn</option>
+                                      <option *ngFor="let d of listDistrict2" value="{{d.id}}">{{d.name}}</option>
+                                    </select>
+                                    <label for="district2">Quận - Huyện</label>
+                                  </div> 
+                                </div>
+                                <div class="col-md-3">
+                                  <div class="form-floating mb-3">
+                                    <select
+                                      class="form-select"
+                                      id="ward2"
+                                      aria-label="Phường - Xã"
+                                      #ward2
+                                    >
+                                      <option value="">Chưa chọn</option>
+                                      <option *ngFor="let w of listWard2" value="{{w.id}}">{{w.name}}</option>
+                                    </select>
+                                    <label for="ward2">Phường - Xã</label>
+                                  </div> 
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-12">
+                              <button (click)="addAppoinment()" class="btn fhc-button" type="submit">Đăng ký</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Trung tâm phòng khám FHC</h5>
+        
+                      <!-- Slides with indicators -->
+                      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                          <div class="carousel-item active">
+                            <img src="https://storage.googleapis.com/fhc-server-394702.appspot.com/carousel/fhc-slide-1.jpg" class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-none d-md-block">
+                              <h5>Với sự thành lập trên 2 tháng</h5>
+                              <p>Chúng tôi cam kết sẽ đem tới trải nghiệm thú vị và an toàn.</p>
+                            </div>
+                          </div>
+                          <div class="carousel-item">
+                            <img src="https://storage.googleapis.com/fhc-server-394702.appspot.com/carousel/fhc-slide-2.jpg" class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-none d-md-block">
+                              <h5>Các bác sĩ có trình độ cao</h5>
+                              <p>Sẵn sàng hoàn thành mọi nhiệm vụ. Cùng bệnh nhân vượt qua mọi thử thách.</p>
+                            </div>
+                          </div>
+                          <div class="carousel-item">
+                            <img src="https://storage.googleapis.com/fhc-server-394702.appspot.com/carousel/fhc-slide-3.jpg" class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-none d-md-block">
+                              <h5>Khẩu hiệu</h5>
+                              <p>Sức khỏe của người bệnh là quan trọng nhất.</p>
+                            </div>
+                          </div>
+                        </div>
+        
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+        
+                      </div>
+        
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </section>
+</main>
+<app-footer></app-footer>

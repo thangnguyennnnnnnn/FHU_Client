@@ -1,0 +1,64 @@
+.input-group-text {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.my-input-group {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
+.my-input-group>.form-control {
+    position: relative;
+    flex: 1 1 auto;
+    width: 1%;
+    min-width: 0;
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.fhc-img {
+    max-width: 280px;
+    max-height: 280px;
+    min-height: 280px;
+    min-width: 280px;
+    border-radius: 56%;
+}
+
+.fhc-img-2 {
+    max-width: 400px;
+    max-height: 400px;
+    min-height: 400px;
+    min-width: 400px;
+    border-radius: 56%;
+}
+
+.fhc-upload:hover, .fhc-upload-icon:hover {
+    transform: scale(0.9);
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.fhc-upload {
+    position: relative;
+    transition: transform 0.3s;
+}
+  
+  
+.fhc-upload-icon {
+    display: none;
+    position: absolute;
+    top: 50%;
+    font-size: 24px;
+    background-color: rgba(243, 240, 240, 0.7);
+    color: rgb(8, 8, 8);
+    border-radius: 50%;
+    padding: 5px;
+}
+  
+.fhc-upload:hover .fhc-upload-icon {
+    display: block; /* Hiển thị biểu tượng khi hover */
+}

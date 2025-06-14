@@ -1,0 +1,262 @@
+<app-header></app-header>
+<app-left-menu></app-left-menu>
+<main id="main" class="main">
+  <section class="section min-height-740 profile">
+    <div class="row">
+      <div class="col-lg-5">
+        <div class="row">
+          <ng-container *ngIf="role == 1">
+            <div class="col-lg-6">
+              <a href="danh-sach-nhan-vien" class="card fhc-card">
+                <div
+                  class="card-body profile-card pt-4 d-flex flex-column align-items-center"
+                >
+                  <i class="bi bi-person-vcard-fill i-fz"></i>
+                  <h2>Danh sách nhân viên</h2>
+                </div>
+              </a>
+            </div>
+            <div class="col-lg-6">
+              <a href="them-nhan-vien" class="card fhc-card">
+                <div
+                  class="card-body profile-card pt-4 d-flex flex-column align-items-center"
+                >
+                  <i class="bi bi-person-vcard-fill i-fz"></i>
+                  <h2>Thêm nhân viên</h2>
+                </div>
+              </a>
+            </div>
+            <div class="col-lg-6">
+              <a href="xem-yeu-cau" class="card fhc-card">
+                <div
+                  class="card-body profile-card pt-4 d-flex flex-column align-items-center"
+                >
+                  <i class="bi bi-window i-fz"></i>
+                  <h2>Yêu cầu</h2>
+                </div>
+              </a>
+            </div>
+            <div class="col-lg-6">
+              <a href="fpt-hospital-management" class="card fhc-card">
+                <div
+                  class="card-body profile-card pt-4 d-flex flex-column align-items-center"
+                >
+                  <i class="bi bi-person-video3 i-fz"></i>
+                  <h2>Quản lý</h2>
+                </div>
+              </a>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="role == 2">
+            <div class="col-lg-6">
+              <a href="quet-ma-qr" class="card fhc-card">
+                <div
+                  class="card-body profile-card pt-4 d-flex flex-column align-items-center"
+                >
+                  <i class="bi bi-qr-code i-fz"></i>
+                  <h2>Quét mã QR</h2>
+                </div>
+              </a>
+            </div>
+            <div class="col-lg-6">
+              <a href="phieu-chuan-doan" class="card fhc-card">
+                <div
+                  class="card-body profile-card pt-4 d-flex flex-column align-items-center"
+                >
+                  <i class="bi bi-search-heart i-fz"></i>
+                  <h2>Tìm kiếm phiếu chuẩn đoán</h2>
+                </div>
+              </a>
+            </div>
+            <div class="col-lg-6">
+              <a href="lich-lam-viec" class="card fhc-card">
+                <div
+                  class="card-body profile-card pt-4 d-flex flex-column align-items-center"
+                >
+                  <i class="bi bi-calendar-month-fill i-fz"></i>
+                  <h2>Lịch làm việc</h2>
+                </div>
+              </a>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="role == 3">
+            <div class="col-lg-6">
+              <a href="quet-ma-qr" class="card fhc-card">
+                <div
+                  class="card-body profile-card pt-4 d-flex flex-column align-items-center"
+                >
+                  <i class="bi bi-qr-code i-fz"></i>
+                  <h2>Quét mã QR</h2>
+                </div>
+              </a>
+            </div>
+            <div class="col-lg-6">
+              <a href="tim-kiem-lich-kham" class="card fhc-card">
+                <div
+                  class="card-body profile-card pt-4 d-flex flex-column align-items-center"
+                >
+                  <i class="bi bi-search-heart i-fz"></i>
+                  <h2>Tìm thẻ khám</h2>
+                </div>
+              </a>
+            </div>
+            <div class="col-lg-6">
+              <a href="lich-lam-viec" class="card fhc-card">
+                <div
+                  class="card-body profile-card pt-4 d-flex flex-column align-items-center"
+                >
+                  <i class="bi bi-calendar-month-fill i-fz"></i>
+                  <h2>Lịch làm việc</h2>
+                </div>
+              </a>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="role == 4">
+            <div class="col-lg-6">
+              <a href="dang-ky-lich-kham" class="card fhc-card">
+                <div
+                  class="card-body profile-card pt-4 d-flex flex-column align-items-center"
+                >
+                  <i class="bi bi-bag-plus-fill i-fz"></i>
+                  <h2>Đăng ký lịch khám</h2>
+                </div>
+              </a>
+            </div>
+            <div class="col-lg-6">
+              <a href="lich-kham" class="card fhc-card">
+                <div
+                  class="card-body profile-card pt-4 d-flex flex-column align-items-center"
+                >
+                  <i class="bi bi-search-heart i-fz"></i>
+                  <h2>Lịch khám đã đăng ký</h2>
+                </div>
+              </a>
+            </div>
+            <div class="col-lg-6">
+              <a href="phieu-chuan-doan" class="card fhc-card">
+                <div
+                  class="card-body profile-card pt-4 d-flex flex-column align-items-center"
+                >
+                  <i class="bi bi-capsule i-fz"></i>
+                  <h2>Xem thông tin chuẩn đoán</h2>
+                </div>
+              </a>
+            </div>
+            <div class="col-lg-6">
+              <a href="the-kham-benh" class="card fhc-card">
+                <div
+                  class="card-body profile-card pt-4 d-flex flex-column align-items-center"
+                >
+                  <i class="bi bi-person-vcard-fill i-fz"></i>
+                  <h2>Thẻ khám bệnh</h2>
+                </div>
+              </a>
+            </div>
+            <div class="col-lg-6">
+              <a href="danh-sach-nhan-vien" class="card fhc-card">
+                <div
+                  class="card-body profile-card pt-4 d-flex flex-column align-items-center"
+                >
+                  <i class="bi bi-search-heart i-fz"></i>
+                  <h2>Tìm kiếm y tá - bác sĩ</h2>
+                </div>
+              </a>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="role == 5">
+            <div class="col-lg-6">
+              <a href="lich-lam-viec" class="card fhc-card">
+                <div
+                  class="card-body profile-card pt-4 d-flex flex-column align-items-center"
+                >
+                  <i class="bi bi-calendar-month-fill i-fz"></i>
+                  <h2>Lịch làm việc</h2>
+                </div>
+              </a>
+            </div>
+            <div class="col-lg-6">
+              <a href="kho-thuoc" class="card fhc-card">
+                <div
+                  class="card-body profile-card pt-4 d-flex flex-column align-items-center"
+                >
+                  <i class="bi bi-capsule i-fz"></i>
+                  <h2>Xem kho thuốc</h2>
+                </div>
+              </a>
+            </div>
+            <div class="col-lg-6">
+              <a href="xem-don-thuoc" class="card fhc-card">
+                <div
+                  class="card-body profile-card pt-4 d-flex flex-column align-items-center"
+                >
+                  <i class="bi bi-prescription2 i-fz"></i>
+                  <h2>Bốc thuốc</h2>
+                </div>
+              </a>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="card">
+          <div class="card-body fhc-card-body">
+            <div
+              id="carouselExampleFade"
+              class="carousel slide carousel-fade"
+              data-bs-ride="carousel"
+            >
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img
+                    src="https://storage.cloud.google.com/fhc-server-394702.appspot.com/carousel/fhc-slide-4.jpg"
+                    class="d-block w-100"
+                    alt="..."
+                  />
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="https://storage.cloud.google.com/fhc-server-394702.appspot.com/carousel/fhc-slide-3.jpg"
+                    class="d-block w-100"
+                    alt="..."
+                  />
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="https://storage.cloud.google.com/fhc-server-394702.appspot.com/carousel/fhc-slide-2.jpg"
+                    class="d-block w-100"
+                    alt="..."
+                  />
+                </div>
+              </div>
+              <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#carouselExampleFade"
+                data-bs-slide="prev"
+              >
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#carouselExampleFade"
+                data-bs-slide="next"
+              >
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<app-footer></app-footer>

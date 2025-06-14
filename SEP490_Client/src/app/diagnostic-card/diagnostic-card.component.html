@@ -1,0 +1,188 @@
+<app-header></app-header>
+<app-left-menu></app-left-menu>
+<main id="main" class="main">
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Thông tin chuẩn đoán</h5>
+            <hr />
+            <form class="row g-3">
+              <div class="col-md-3">
+                <div class="form-floating">
+                  <input
+                    #appointmentId
+                    type="text"
+                    class="form-control"
+                    id="appointmentId"
+                    placeholder="Mã lịch khám"
+                    autocomplete="off"
+                    value=""
+                  />
+                  <label for="appointmentId">Mã lịch khám</label>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-floating">
+                  <input
+                    #name
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    placeholder="Tên bệnh nhân"
+                    autocomplete="off"
+                    value=""
+                  />
+                  <label for="name">Tên bệnh nhân</label>
+                </div>
+              </div>
+              <div class="col-md-3 text-center">
+                <div class="form-floating mg-top-8">
+                  <button
+                    (click)="searchDiagnosticCard()"
+                    type="button"
+                    class="btn fhc-button"
+                  >
+                    <i class="bx bx-search-alt-2 me-1"></i> Tìm kiếm
+                  </button>
+                </div>
+              </div>
+              <hr />
+              <div class="col-lg-12">
+                <div class="row fhc-body-custom">
+                  <div *ngFor="let d of diagnosticDisplayList" class="col-lg-6">
+                    <div class="card">
+                      <div class="card-body">
+                        <h1 class="card-title-2 text-center fs-15">
+                          Thông tin chuẩn đoán
+                        </h1>
+                        <hr />
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <div class="row label-2">
+                              <div class="col-lg-4 col-md-4 label">
+                                Mã khám bệnh:
+                              </div>
+                              <div class="col-lg-8 col-md-8">
+                                {{ d.appointmentId }}
+                              </div>
+                            </div>
+                            <div class="row label-2">
+                              <div class="col-lg-4 col-md-4 label">
+                                Bệnh nhân:
+                              </div>
+                              <div class="col-lg-8 col-md-8">
+                                {{ d.fullname }}
+                              </div>
+                            </div>
+                            <div class="row label-2">
+                              <div class="col-lg-4 col-md-4 label">
+                                Điện thoại:
+                              </div>
+                              <div class="col-lg-8 col-md-8">
+                                {{ d.phone }}
+                              </div>
+                            </div>
+                            <div class="row label-2">
+                              <div class="col-lg-4 col-md-4 label">
+                                Tên (Dr):
+                              </div>
+                              <div class="col-lg-8 col-md-8">
+                                {{ d.doctorFullName }}
+                              </div>
+                            </div>
+                            <div class="row label-2">
+                              <div class="col-lg-4 col-md-4 label">
+                                Điện thoại (Dr):
+                              </div>
+                              <div class="col-lg-8 col-md-8">
+                                {{ d.doctorPhoneNumber }}
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="row label-2">
+                              <div class="col-lg-4 col-md-4 label">
+                                KQ chuẩn đoán:
+                              </div>
+                              <div class="col-lg-8 col-md-8">
+                                {{ d.diagnosticResult }}
+                              </div>
+                            </div>
+                            <div class="row label-2">
+                              <div class="col-lg-4 col-md-4 label">
+                                Trạng thái:
+                              </div>
+                              <div class="col-lg-8 col-md-8">
+                                <span class="badge bg-warning"
+                                  ><i class="bi bi-check-circle me-1"></i>
+                                  {{ getStatus(d.diagnosticStatus) }}
+                                </span>
+                              </div>
+                            </div>
+                            <div class="row label-2">
+                              <div class="col-lg-4 col-md-4 label">
+                                Ngày tái khám:
+                              </div>
+                              <div class="col-lg-8 col-md-8">
+                                {{ d.dayOfReview }}
+                              </div>
+                            </div>
+                            <div class="row label-2">
+                              <div class="col-lg-4 col-md-4 label">
+                                TG bắt đầu:
+                              </div>
+                              <div class="col-lg-8 col-md-8">
+                                {{ d.diagnosisStartTime }}
+                              </div>
+                            </div>
+                            <div class="row label-2">
+                              <div class="col-lg-4 col-md-4 label">
+                                TG kết thúc:
+                              </div>
+                              <div class="col-lg-8 col-md-8">
+                                {{ d.diagnosisEndTime }}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row text-center">
+                          <div *ngIf="role == 2" class="col-lg-6 col-md-6">
+                            <button
+                              (click)="
+                                goToUpdateDiagnosticCard(d.appointmentId)
+                              "
+                              type="button"
+                              class="btn fhc-button"
+                            >
+                              <i class="bi bi-arrow-right-square me-1"></i>
+                              Cập nhập
+                            </button>
+                          </div>
+                          <div class="col-lg-6 col-md-6">
+                            <button
+                              (click)="
+                                goToMedicineCard(d.appointmentId)
+                              "
+                              type="button"
+                              class="btn fhc-button"
+                            >
+                              <i class="bi bi-arrow-right-square me-1"></i>
+                              Xem đơn thuốc
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<app-footer></app-footer>

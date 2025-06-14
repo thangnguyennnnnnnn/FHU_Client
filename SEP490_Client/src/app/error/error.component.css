@@ -1,0 +1,22 @@
+.notification{
+    height: 100px;
+    width: 50%;
+    z-index: 9999;
+    position: absolute;
+    left: 25%;
+    top: -10%;
+    opacity: 0;
+    /* display: none; */
+    text-align: center;
+    transition: top 0.5s ease, opacity 0.5s ease;
+}
+
+.notification.show {
+    top: 10px;
+    opacity: 1;
+}
+
+.notification.hidden {
+    top: -10%;
+    opacity: 0;
+}

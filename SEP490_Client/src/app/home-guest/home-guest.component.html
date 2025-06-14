@@ -1,0 +1,724 @@
+<header id="header" class="fixed-top d-flex align-items-center">
+  <div class="container-fluid">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-xl-11 d-flex align-items-center justify-content-between">
+        <h1 class="logo"><a href="">FHC</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html" class="logo"><img src="assets_2/img/logo.png" alt="" class="img-fluid"></a>-->
+
+        <nav id="navbar" class="navbar">
+          <ul>
+            <li>
+              <a class="nav-link scrollto active" href="guest">Trang chủ</a>
+            </li>
+            <li><a class="nav-link scrollto" href="#about">Chúng tôi</a></li>
+            <li><a class="nav-link scrollto" href="#services">Dịch vụ</a></li>
+            <li><a class="nav-link scrollto" href="#portfolio">Hình ảnh</a></li>
+            <li><a class="nav-link scrollto" href="#team">Team</a></li>
+            <li><a class="nav-link scrollto" href="#contact">Liên hệ</a></li>
+            <li style="margin-left: 25px">
+              <button
+                class="nav-link scrollto btn fhc-button"
+                (click)="gotoLogin()"
+              >
+                Đăng nhập
+              </button>
+            </li>
+          </ul>
+        </nav>
+        <!-- .navbar -->
+      </div>
+    </div>
+  </div>
+  <div #notiContent id="notification" class="notification"></div>
+</header>
+<!-- End Header -->
+
+<section class="section">
+  <div
+    id="carouselExampleFade"
+    class="carousel slide carousel-fade"
+    data-bs-ride="carousel"
+  >
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img
+          src="https://storage.googleapis.com/fhc-server-394702.appspot.com/carousel/fhc-slide-1.jpg"
+          class="d-block w-100"
+          alt="..."
+        />
+        <div class="carousel-caption d-none d-md-block fhc-guest-page-slide">
+          <div class="container">
+            <h2 class="animate__animated animate__fadeInDown fhc-h2">
+              Chúng tôi hi vọng sẽ mang đến cho các bạn trải nghiệm tốt nhất
+            </h2>
+            <p class="animate__animated animate__fadeInUp">
+              Hãy đến với FHC. FHC tự tin cung cấp đến cho bạn những dịch vụ
+              tuyệt với nhất
+            </p>
+            <button
+              (click)="gotoLogin()"
+              class="btn-get-started scrollto animate__animated animate__fadeInUp btn fhc-button"
+            >
+              Đăng nhập
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img
+          src="https://storage.googleapis.com/fhc-server-394702.appspot.com/carousel/fhc-slide-2.jpg"
+          class="d-block w-100"
+          alt="..."
+        />
+        <div class="carousel-caption d-none d-md-block fhc-guest-page-slide">
+          <div class="container">
+            <h2 class="animate__animated animate__fadeInDown fhc-h2">
+              Đội ngũ y bác sĩ có kinh nghiệm
+            </h2>
+            <p class="animate__animated animate__fadeInUp">
+              Đồng hành cùng các bạn là những bác sĩ nổi tiếng và nhiều kinh
+              nghiệm trong lĩnh vực y tê.
+            </p>
+            <button
+              (click)="gotoLogin()"
+              class="btn-get-started scrollto animate__animated animate__fadeInUp btn fhc-button"
+            >
+              Đăng nhập
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img
+          src="https://storage.googleapis.com/fhc-server-394702.appspot.com/carousel/fhc-slide-3.jpg"
+          class="d-block w-100"
+          alt="..."
+        />
+        <div class="carousel-caption d-none d-md-block fhc-guest-page-slide">
+          <div class="container">
+            <h2 class="animate__animated animate__fadeInDown fhc-h2">
+              Khẩu hiệu
+            </h2>
+            <p class="animate__animated animate__fadeInUp">
+              Sức khỏe của con người là trên hết
+            </p>
+            <button
+              (click)="gotoLogin()"
+              class="btn-get-started scrollto animate__animated animate__fadeInUp btn fhc-button"
+            >
+              Đăng nhập
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#carouselExampleFade"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#carouselExampleFade"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</section>
+
+<main id="main">
+  <!-- ======= About Us Section ======= -->
+  <section id="about">
+    <div class="container" data-aos="fade-up">
+      <header class="section-header">
+        <h3>Chúng tôi</h3>
+        <p>
+          Bệnh viện của chúng tôi là một hình mẫu tiên tiến về chăm sóc sức
+          khỏe, nơi bạn có thể tin tưởng hoàn toàn vào dịch vụ chất lượng và tận
+          tâm. Với đội ngũ y bác sĩ tận tâm và giàu kinh nghiệm, chúng tôi cam
+          kết mang đến những phương pháp điều trị hiện đại và tiên tiến nhất,
+          cùng với môi trường thân thiện và an toàn. Chúng tôi hiểu rằng sức
+          khỏe là tài sản quý báu, vì vậy chúng tôi luôn luôn sẵn sàng hỗ trợ và
+          đồng hành cùng bạn trên hành trình chăm sóc sức khỏe và hạnh phúc.
+        </p>
+      </header>
+
+      <div class="row about-cols">
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="about-col">
+            <div class="img">
+              <img
+                src="https://storage.googleapis.com/fhc-server-394702.appspot.com/carousel/about/plan.png"
+                alt=""
+                class="img-fluid"
+              />
+              <div class="icon"><i class="bi bi-bar-chart"></i></div>
+            </div>
+            <h2 class="title"><a href="#">Nhiệm vụ</a></h2>
+            <p>
+              Tại bệnh viện, sứ mệnh chúng tôi không chỉ dừng lại ở việc cung
+              cấp chất lượng dịch vụ y tế, mà còn tập trung vào việc xây dựng
+              mối quan hệ đồng hành bền vững với cộng đồng. Chúng tôi không chỉ
+              là nơi cung cấp điều trị và chăm sóc, mà còn là một trạm dừng an
+              lành trong hành trình sức khỏe của mọi người. Bằng việc kết hợp sự
+              tận tâm của đội ngũ chuyên gia y tế và sự tiên phong trong công
+              nghệ, chúng tôi cam kết giữ vững tầm nhìn về một cộng đồng khỏe
+              mạnh, hạnh phúc và phồn thịnh.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="about-col">
+            <div class="img">
+              <img
+                src="https://storage.googleapis.com/fhc-server-394702.appspot.com/carousel/about/plan.png"
+                alt=""
+                class="img-fluid"
+              />
+              <div class="icon"><i class="bi bi-brightness-high"></i></div>
+            </div>
+            <h2 class="title"><a href="#">Kế Hoạch</a></h2>
+            <p>
+              Trong 5 năm tới, bệnh viện đặt kế hoạch tập trung nâng cao chất
+              lượng dịch vụ y tế, mở rộng phạm vi chăm sóc và áp dụng công nghệ
+              tiên tiến trong điều trị. Chúng tôi dự định phát triển các bộ phận
+              chuyên môn, cải thiện cơ sở vật chất, tạo môi trường an toàn cho
+              bệnh nhân. Hợp tác chặt chẽ với các đối tác y tế và giáo dục sẽ
+              giúp chúng tôi mang đến giải pháp tốt nhất cho cộng đồng. Tập
+              trung vào tăng cường hoạt động giáo dục và tư vấn, tạo sự hiểu
+              biết sâu rộ về sức khỏe cho mọi người.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="about-col">
+            <div class="img">
+              <img
+                src="https://storage.googleapis.com/fhc-server-394702.appspot.com/carousel/about/plan.png"
+                alt=""
+                class="img-fluid"
+              />
+              <div class="icon"><i class="bi bi-calendar4-week"></i></div>
+            </div>
+            <h2 class="title"><a href="#">Tầm nhìn</a></h2>
+            <p>
+              Trong 5 năm tới là trở thành một cơ sở y tế tiên tiến, đáng tin
+              cậy. Chúng tôi hướng đến việc mang đến chất lượng dịch vụ y tế
+              hàng đầu, kết hợp với sự tiên phong trong công nghệ và đội ngũ y
+              bác sĩ giàu kinh nghiệm. Hợp tác chặt chẽ với các đối tác y tế và
+              giáo dục cùng việc tăng cường hoạt động giáo dục và tư vấn cho
+              cộng đồng là phần không thể thiếu của tầm nhìn của chúng tôi. Cuối
+              cùng là xây dựng một môi trường y tế thân thiện, góp phần vào sự
+              phát triển bền vững của cộng đồng.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End About Us Section -->
+
+  <!-- ======= Services Section ======= -->
+  <section id="services">
+    <div class="container" data-aos="fade-up">
+      <header class="section-header wow fadeInUp">
+        <h3>DỊCH VỤ</h3>
+        <p>
+          Chúng tôi cam kết mang đến dịch vụ chất lượng hàng đầu, tận tâm và đa
+          dạng, đáp ứng mọi nhu cầu của khách hàng, xây dựng mối quan hệ tin cậy
+          và mang lại trải nghiệm tốt nhất..
+        </p>
+      </header>
+
+      <div class="row">
+        <div
+          class="col-lg-4 col-md-6 box"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          <div class="icon"><i class="bi bi-briefcase"></i></div>
+          <h4 class="title"><a href="">Đăng ký khám bệnh online</a></h4>
+          <p class="description">
+            Đăng ký khám bệnh trực tuyến giúp bạn tiết kiệm thời gian, thuận
+            tiện và nhanh chóng chọn lịch hẹn, tránh xếp hàng, đồng thời mang
+            lại sự linh hoạt và kiểm soát trong việc quản lý sức khỏe cá nhân.
+          </p>
+        </div>
+        <div
+          class="col-lg-4 col-md-6 box"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          <div class="icon"><i class="bi bi-card-checklist"></i></div>
+          <h4 class="title"><a href="">Xem lịch khám</a></h4>
+          <p class="description">
+            Xem lịch khám online giúp bạn dễ dàng tra cứu và chọn lịch hẹn phù
+            hợp với thời gian của mình, tiết kiệm thời gian chờ đợi và mang lại
+            sự linh hoạt trong việc quản lý thời gian và sức khỏe của bạn.
+          </p>
+        </div>
+        <div
+          class="col-lg-4 col-md-6 box"
+          data-aos="fade-up"
+          data-aos-delay="300"
+        >
+          <div class="icon"><i class="bi bi-qr-code"></i></div>
+          <h4 class="title"><a href="">QR Code</a></h4>
+          <p class="description">
+            Mã QR code giúp bạn tiện lợi chia sẻ thông tin cá nhân, dễ dàng truy
+            cập dữ liệu quan trọng và đảm bảo tính bảo mật, tạo thuận tiện và
+            hiệu quả trong việc quản lý thông tin cá nhân và sử dụng dịch vụ.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Portfolio Section ======= -->
+  <section id="portfolio" class="section-bg">
+    <div class="container" data-aos="fade-up">
+      <header class="section-header">
+        <h3 class="section-title">Hình ảnh</h3>
+      </header>
+
+      <div class="row" data-aos="fade-up" data-aos-delay="100">
+        <div class="col-lg-12">
+          <ul id="portfolio-flters">
+            <li data-filter=".filter-app" class="filter-active">Khám bệnh</li>
+            <li data-filter=".filter-card">Xem lịch khám</li>
+            <li data-filter=".filter-web">Xem chuẩn đoán</li>
+          </ul>
+        </div>
+      </div>
+
+      <div
+        class="row portfolio-container"
+        data-aos="fade-up"
+        data-aos-delay="200"
+      >
+        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+          <div class="portfolio-wrap">
+            <figure>
+              <img
+                src="https://storage.cloud.google.com/fhc-server-394702.appspot.com/carousel/about/img/img1.png"
+                class="img-fluid"
+                alt=""
+              />
+              <a
+                target="_blank"
+                href="https://storage.cloud.google.com/fhc-server-394702.appspot.com/carousel/about/img/img1.png"
+                data-lightbox="portfolio"
+                data-title="App 1"
+                class="link-preview"
+                ><i class="bi bi-eye"></i
+              ></a>
+            </figure>
+
+            <div class="portfolio-info">
+              <h4><a href="#">Đăng ký khám bệnh</a></h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+          <div class="portfolio-wrap">
+            <figure>
+              <img
+                src="https://storage.cloud.google.com/fhc-server-394702.appspot.com/carousel/about/img/img2.png"
+                class="img-fluid"
+                alt=""
+              />
+              <a
+                target="_blank"
+                href="https://storage.cloud.google.com/fhc-server-394702.appspot.com/carousel/about/img/img2.png"
+                class="link-preview portfolio-lightbox"
+                data-gallery="portfolioGallery"
+                title="Web 3"
+                ><i class="bi bi-eye"></i
+              ></a>
+            </figure>
+            <div class="portfolio-info">
+              <h4><a href="#">Nhập thông tin</a></h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+          <div class="portfolio-wrap">
+            <figure>
+              <img
+                src="https://storage.cloud.google.com/fhc-server-394702.appspot.com/carousel/about/img/img3.png"
+                class="img-fluid"
+                alt=""
+              />
+              <a
+                target="_blank"
+                href="https://storage.cloud.google.com/fhc-server-394702.appspot.com/carousel/about/img/img3.png"
+                class="link-preview portfolio-lightbox"
+                data-gallery="portfolioGallery"
+                title="App 2"
+                ><i class="bi bi-eye"></i
+              ></a>
+            </figure>
+
+            <div class="portfolio-info">
+              <h4><a href="#">Xác nhận thông tin</a></h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+          <div class="portfolio-wrap">
+            <figure>
+              <img
+                src="https://storage.cloud.google.com/fhc-server-394702.appspot.com/carousel/about/img/img4.png"
+                class="img-fluid"
+                alt=""
+              />
+              <a
+                target="_blank"
+                href="https://storage.cloud.google.com/fhc-server-394702.appspot.com/carousel/about/img/img4.png"
+                class="link-preview portfolio-lightbox"
+                data-gallery="portfolioGallery"
+                title="Card 2"
+                ><i class="bi bi-eye"></i
+              ></a>
+            </figure>
+
+            <div class="portfolio-info">
+              <h4><a href="#">Đăng ký thành công</a></h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+          <div class="portfolio-wrap">
+            <figure>
+              <img
+                src="https://storage.cloud.google.com/fhc-server-394702.appspot.com/carousel/about/img/img5.png"
+                class="img-fluid"
+                alt=""
+              />
+              <a
+                target="_blank"
+                href="https://storage.cloud.google.com/fhc-server-394702.appspot.com/carousel/about/img/img5.png"
+                class="link-preview portfolio-lightbox"
+                data-gallery="portfolioGallery"
+                title="Card 1"
+                ><i class="bi bi-eye"></i
+              ></a>
+            </figure>
+
+            <div class="portfolio-info">
+              <h4><a href="#">Đơn khám</a></h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+          <div class="portfolio-wrap">
+            <figure>
+              <img
+                src="https://storage.cloud.google.com/fhc-server-394702.appspot.com/carousel/about/img/img6.png"
+                class="img-fluid"
+                alt=""
+              />
+              <a
+                target="_blank"
+                href="https://storage.cloud.google.com/fhc-server-394702.appspot.com/carousel/about/img/img6.png"
+                class="link-preview portfolio-lightbox"
+                data-gallery="portfolioGallery"
+                title="Card 1"
+                ><i class="bi bi-eye"></i
+              ></a>
+            </figure>
+
+            <div class="portfolio-info">
+              <h4><a href="#">Thông tin chuẩn đoán</a></h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Portfolio Section -->
+
+  <!-- ======= Team Section ======= -->
+  <section id="team">
+    <div class="container" data-aos="fade-up">
+      <div class="section-header">
+        <h3>Team</h3>
+        <p>
+          Đội nhóm này là một tập hợp các cá nhân tài năng và đam mê, cùng nhau
+          làm việc để đạt được mục tiêu chung và tạo nên những thành công đáng
+          kể.
+        </p>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-3 col-md-6">
+          <div class="member" data-aos="fade-up" data-aos-delay="100">
+            <img
+              src="https://storage.googleapis.com/fhc-server-394702.appspot.com/carousel/about/ndt.jpg"
+              class="img-fluid"
+              alt=""
+            />
+            <div class="member-info">
+              <div class="member-info-content">
+                <h4>Nguyễn Đức Thịnh</h4>
+                <span>Bác sĩ</span>
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="member" data-aos="fade-up" data-aos-delay="200">
+            <img
+              src="https://storage.googleapis.com/fhc-server-394702.appspot.com/carousel/about/nht.jpg"
+              class="img-fluid"
+              alt=""
+            />
+            <div class="member-info">
+              <div class="member-info-content">
+                <h4>Nguyễn Huỳnh Thắng</h4>
+                <span>Dược sĩ</span>
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="member" data-aos="fade-up" data-aos-delay="300">
+            <img src="https://storage.googleapis.com/fhc-server-394702.appspot.com/carousel/about/hbp.jpg" class="img-fluid" alt="" />
+            <div class="member-info">
+              <div class="member-info-content">
+                <h4>Huỳnh Bá Phú</h4>
+                <span>Bác Sĩ</span>
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="member" data-aos="fade-up" data-aos-delay="400">
+            <img src="https://storage.googleapis.com/fhc-server-394702.appspot.com/carousel/about/nqt.jpg" class="img-fluid" alt="" />
+            <div class="member-info">
+              <div class="member-info-content">
+                <h4>Ngô Quan Tín</h4>
+                <span>Y tá</span>
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Team Section -->
+
+  <!-- ======= Contact Section ======= -->
+  <section id="contact" class="section-bg">
+    <div class="container" data-aos="fade-up">
+      <div class="section-header">
+        <h3>Liên hệ</h3>
+        <p>
+          Hãy đóng góp những ý kiến của các bạn để chúng tôi có thể ngày càng
+          hoàn thiện hơn
+        </p>
+      </div>
+
+      <div class="row contact-info">
+        <div class="col-md-4">
+          <div class="contact-address">
+            <i class="bi bi-geo-alt"></i>
+            <h3>Địa chỉ</h3>
+            <address>Đà Nẵng, Việt Nam</address>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="contact-phone">
+            <i class="bi bi-phone"></i>
+            <h3>Số điện thoại</h3>
+            <p><a href="tel:+0386993897">0386993897</a></p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="contact-email">
+            <i class="bi bi-envelope"></i>
+            <h3>Email</h3>
+            <p>
+              <a href="mailto:fhchospital@gmail.com">fhchospital@gmail.com</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="form">
+        <form method="post" role="form" class="php-email-form">
+          <div class="row">
+            <div class="form-group col-md-6">
+              <input
+                type="text"
+                name="name"
+                class="form-control"
+                id="name"
+                placeholder="Tên của bạn"
+                required
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <input
+                type="email"
+                class="form-control"
+                name="email"
+                id="email"
+                placeholder="Địa chỉ email"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              name="subject"
+              id="subject"
+              placeholder="Tiêu đề"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <textarea
+              class="form-control"
+              name="message"
+              id="message"
+              rows="5"
+              placeholder="Nội dung"
+              required
+            ></textarea>
+          </div>
+          <div class="text-center">
+            <button (click)="sendFeedback()" type="submit">Gửi</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer">
+  <div class="footer-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-6 footer-info">
+          <h3>FHC</h3>
+          <p>
+            Bệnh viện ước mơ trở thành tâm điểm y tế vượt trội, nơi cung cấp
+            dịch vụ y tế chất lượng hàng đầu và chuẩn mực chăm sóc. Chúng tôi
+            khát khao xây dựng một môi trường an toàn, nâng tầm chất lượng cuộc
+            sống qua sự quan tâm tận tâm đến sức khỏe của mọi người. Ước mơ của
+            chúng tôi còn là góp phần vào sự phát triển bền vững của cộng đồng,
+            để tương lai mọi người tràn đầy sức khỏe và hạnh phúc.
+          </p>
+        </div>
+
+        <div class="col-lg-3 col-md-6 footer-links">
+          <h4>Điều hướng</h4>
+          <ul>
+            <li>
+              <i class="bi bi-chevron-right"></i> <a href="">Trang chủ</a>
+            </li>
+            <li>
+              <i class="bi bi-chevron-right"></i> <a href="#about">Chúng tôi</a>
+            </li>
+            <li>
+              <i class="bi bi-chevron-right"></i>
+              <a href="#services">Dịch vụ</a>
+            </li>
+            <li>
+              <i class="bi bi-chevron-right"></i>
+              <a href="#portfolio">Hình ảnh</a>
+            </li>
+            <li>
+              <i class="bi bi-chevron-right"></i> <a href="#contact">Góp ý</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-6 footer-contact">
+          <h4>Liên hệ</h4>
+          <p>
+            Đà Nẵng <br />
+            Việt Nam<br />
+            <strong>Phone:</strong> +0386993897<br />
+            <strong>Email:</strong> fhchospital@gmail.com<br />
+          </p>
+
+          <div class="social-links">
+            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 footer-newsletter">
+          <h4>Lời cảm ơn</h4>
+          <p>
+            Chúng tôi chân thành cảm ơn sự quan tâm đặc biệt của bạn đến Bệnh
+            viện FHC. Điều này tạo động lực mạnh mẽ để chúng tôi tiếp tục nỗ
+            lực, cải tiến và đảm bảo mang đến dịch vụ y tế tốt nhất cho mọi
+            người. Sự ủng hộ của bạn là nguồn động viên quý báu trong việc xây
+            dựng một cộng đồng khỏe mạnh và hạnh phúc. Xin chân thành cảm ơn và
+            kính chúc bạn luôn mạnh khỏe và an vui.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="copyright">
+      &copy; Copyright <strong>FHC</strong>. All Rights Reserved
+    </div>
+    <div class="credits">Designed by <a href="#">FHC Team</a></div>
+  </div>
+</footer>

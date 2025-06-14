@@ -1,0 +1,205 @@
+<app-header></app-header>
+<app-left-menu></app-left-menu>
+<main id="main" class="main">
+  <section class="section min-height-740">
+    <div *ngIf="apListLength > 0" class="row">
+      <div class="col-lg-8">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <form class="row g-3">
+                    <div class="col-md-4">
+                      <div class="form-floating mb-3">
+                        <select
+                          class="form-select"
+                          id="status"
+                          aria-label="Trạng thái"
+                          #status
+                          (change)="changeStatus()"
+                        >
+                          <option value="">Chưa chọn</option>
+                          <option value="Tạo thành công">Tạo thành công</option>
+                          <option value="Xác nhận khám">Xác nhận khám</option>
+                          <option value="Đang khám">Đang khám</option>
+                          <option value="Hoàn thành">Hoàn thành</option>
+                          <option value="Đã nhận thuốc">Đã nhận thuốc</option>
+                          <option value="Hoàn thành">Hoàn thành</option>
+                          <option value="Đã hủy">Đã hủy</option>
+                        </select>
+                        <label for="status">Trạng thái</label>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="apListLength > 0" class="col-lg-12 dp-result pd-top-15">
+            <div class="card">
+              <div class="card-body min-height-500">
+                <div class="row">
+                  <div
+                    *ngFor="let ap of apListDisplay"
+                    class="col-lg-12 pd-top-15"
+                  >
+                    <div class="card">
+                      <div class="card-body min-height-460">
+                        <div class="d-flex justify-content-center py-4">
+                          <a
+                            href="#"
+                            class="logo d-flex align-items-center w-auto"
+                          >
+                            <img src="assets/img/logo.png" alt="" />
+                            <span class="d-none d-lg-block"
+                              >FPT Hospital Care</span
+                            >
+                          </a>
+                        </div>
+                        <hr />
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <div class="row label-2">
+                              <div class="col-lg-4 col-md-4 label">
+                                Mã khám bệnh:
+                              </div>
+                              <div class="col-lg-8 col-md-8">
+                                {{ ap.appointmentBeforId }}
+                              </div>
+                            </div>
+                            <div class="row label-2">
+                              <div class="col-lg-4 col-md-4 label">
+                                Bệnh nhân:
+                              </div>
+                              <div class="col-lg-8 col-md-8">
+                                {{ ap.fullname }}
+                              </div>
+                            </div>
+                            <div class="row label-2">
+                              <div class="col-lg-4 col-md-4 label">
+                                Điện thoại:
+                              </div>
+                              <div class="col-lg-8 col-md-8">
+                                {{ ap.phone }}
+                              </div>
+                            </div>
+                            <div class="row label-2">
+                              <div class="col-lg-4 col-md-4 label">
+                                Đ.thoại (NN):
+                              </div>
+                              <div class="col-lg-8 col-md-8">
+                                {{ ap.phoneNT }}
+                              </div>
+                            </div>
+                            <div class="row label-2">
+                              <div class="col-lg-4 col-md-4 label">
+                                Địa chỉ:
+                              </div>
+                              <div class="col-lg-8 col-md-8">
+                                {{ ap.address }}
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="row label-2">
+                              <div class="col-lg-4 col-md-4 label">
+                                Loại khám:
+                              </div>
+                              <div class="col-lg-8 col-md-8">
+                                {{ ap.facultyName }}
+                              </div>
+                            </div>
+                            <div class="row label-2">
+                              <div class="col-lg-4 col-md-4 label">
+                                Ngày khám:
+                              </div>
+                              <div class="col-lg-8 col-md-8">
+                                {{ ap.examinationDate }}
+                              </div>
+                            </div>
+                            <div class="row label-2">
+                              <div class="col-lg-4 col-md-4 label">
+                                Giờ khám:
+                              </div>
+                              <div class="col-lg-8 col-md-8">
+                                {{ ap.examinationTime }}
+                              </div>
+                            </div>
+                            <div class="row label-2">
+                              <div class="col-lg-4 col-md-4 label">Bác sĩ:</div>
+                              <div class="col-lg-8 col-md-8">
+                                {{ ap.doctorName }}
+                              </div>
+                            </div>
+                            <div class="row label-2">
+                              <div class="col-lg-4 col-md-4 label">
+                                Trạng thái:
+                              </div>
+                              <div class="col-lg-8 col-md-8">
+                                <span *ngIf="ap.status == 'Đã Hủy'" class="badge bg-danger"
+                                  ><i class="bi bi-check-circle me-1"></i>
+                                  {{ ap.status }}
+                                </span>
+                                <span *ngIf="ap.status != 'Đã Hủy'" class="badge bg-success"
+                                  ><i class="bi bi-check-circle me-1"></i>
+                                  {{ ap.status }}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <div class="col-12 text-center">
+                              <button
+                                onclick="genQR(2)"
+                                (click)="viewQRCode(ap.appointmentBeforId)"
+                                type="button"
+                                class="btn fhc-button"
+                              >
+                                <i class="ri ri-eye-fill me-1"></i> Xem QR Code
+                              </button>
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="col-12 text-center">
+                              <button [disabled]="ap.status !== 'Tạo thành công'" (click)="cancel(ap.appointmentBeforId)" type="button" class="btn fhc-button">
+                                <i class="bi bi-trash me-1"></i> Hủy
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div #QRcode class="col-lg-4">
+        <div class="card">
+          <div class="card-body min-height-550">
+            <h1 class="card-title-2 text-center">Mã QR Code</h1>
+            <hr />
+            <input id="nameFileQR" #nameFileQR hidden type="text" value="" />
+            <input id="qrCode" #qrCode hidden type="text" value="" />
+            <div class="row mb-3 text-center">
+              <div id="qrcode" class="col-sm-12 text-center"></div>
+            </div>
+            <hr />
+            <div *ngIf="haveQR" class="col-12 text-center">
+              <button onclick="downloadQR()" type="button" class="btn fhc-button">
+                <i class="bi bi-download me-1"></i> Tải xuống
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<app-footer></app-footer>

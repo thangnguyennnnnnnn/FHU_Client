@@ -1,0 +1,26 @@
+.header-avt {
+    max-height: 40px;
+    min-height: 40px;
+    max-width: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+}
+
+.fhc-noti {
+    max-height: 400px;
+    overflow: overlay;
+}
+
+.fhc-unread {
+    color: rgb(6, 212, 248);
+    background-color: #f7f6d8;
+}
+
+.fhc-noti:hover {
+    cursor: pointer;
+}
+
+.fhc-active {
+    color: #0a21f7 !important;
+    background: #c0d1f3 !important;
+  }

@@ -1,0 +1,188 @@
+<app-header></app-header>
+<app-left-menu></app-left-menu>
+<main id="main" class="main">
+  <section class="section min-height-740">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body min-height-550">
+            <div class="row">
+              <form class="row g-3">
+                <div class="col-md-2">
+                  <div class="form-floating">
+                    <input
+                      #staffId
+                      type="text"
+                      class="form-control"
+                      id="staffId"
+                      placeholder="Mã nhân viên"
+                      autocomplete="off"
+                      value=""
+                    />
+                    <label for="staffId">Mã nhân viên</label>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-floating">
+                    <input
+                      #staffName
+                      name="staffName"
+                      type="text"
+                      class="form-control"
+                      id="staffName"
+                      placeholder="Mã nhân viên"
+                      autocomplete="off"
+                      value=""
+                    />
+                    <label for="staffName">Tên nhân viên</label>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-floating">
+                    <input
+                      #faculty
+                      type="text"
+                      class="form-control"
+                      name="name"
+                      placeholder="Loại việc"
+                      autocomplete="off"
+                      value=""
+                    />
+                    <label for="name">Khoa làm việc</label>
+                  </div>
+                </div>
+                <div class="col-md-4 text-center">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-floating mg-top-8">
+                        <button
+                          (click)="search()"
+                          type="button"
+                          class="btn fhc-button"
+                        >
+                          <i class="bx bx-search-alt-2 me-1"></i> Tìm kiếm
+                        </button>
+                      </div>
+                    </div>
+                    <div *ngIf="userId == '1'" class="col-md-6">
+                      <div class="form-floating mg-top-8">
+                        <a
+                          href="them-nhan-vien"
+                          type="button"
+                          class="btn fhc-button"
+                        >
+                          <i class="bi bi-person-plus-fill me-1"></i> Thêm nhân
+                          viên
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <hr />
+          </div>
+        </div>
+      </div>
+      <div *ngIf="isDisplay" class="col-lg-12">
+        <div class="card pd-10">
+          <div class="row mg-t-10px profile">
+            <div *ngFor="let e of employeeSearchModelList" class="col-lg-3">
+              <div class="card fhc-card">
+                <div
+                  class="card-body profile-card pt-4 d-flex flex-column align-items-center"
+                >
+                  <img
+                    #imgAvatarD
+                    src="{{ e.avt }}"
+                    alt="Profile"
+                    class="fhc-img-2"
+                  />
+                  <h2>{{ e.fullname }}</h2>
+                  <h3>{{ e.position }}</h3>
+                  <div class="col-md-4">
+                    <div class="form-floating mg-top-8">
+                      <button
+                        (click)="showPopupReport(e)"
+                        type="button"
+                        class="btn fhc-button"
+                      >
+                        Chi tiết
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<app-footer></app-footer>
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <section class="section profile">
+      <div class="row">
+          <div class="col-xl-4">
+              <div class="card fhc-card">
+                  <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                      <img #imgAvatarD src="{{employeeSearchModel.avt}}" alt="Profile" class="fhc-img-2">
+                      <h2>{{employeeSearchModel.fullname}}</h2>
+                      <h3>{{employeeSearchModel.position}}</h3>
+                  </div>
+              </div>
+          </div>
+          <div class="col-xl-8">
+              <div class="card fhc-card">
+                  <div class="profile-overview card-body pt-2">
+                    <h5 class="card-title">Thông tin</h5>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 label ">Họ và tên</div>
+                                <div class="col-lg-8 col-md-8">{{employeeSearchModel.fullname}}</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 label">Chức vụ</div>
+                                <div class="col-lg-8 col-md-8">{{employeeSearchModel.position}}</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 label">Ngày tham gia</div>
+                                <div class="col-lg-8 col-md-8">{{employeeSearchModel.createAt}}</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 label">Điện thoại</div>
+                                <div class="col-lg-8 col-md-8">{{employeeSearchModel.phone}}</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 label">Email</div>
+                                <div class="col-lg-8 col-md-8">{{employeeSearchModel.email}}</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 label">Nơi làm việc</div>
+                                <div class="col-lg-8 col-md-8">{{employeeSearchModel.place}}</div>
+                            </div>
+                        </div>                               
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <button (click)="close()" type="button" class="btn fhc-button ml-5">
+        <i class="bi bi-x-circle me-1"></i> Thoát
+      </button>
+  </section>
+  </div>
+</div>

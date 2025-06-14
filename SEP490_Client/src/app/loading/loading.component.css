@@ -1,0 +1,18 @@
+.spinner-container {
+  position: fixed; /* Đặt vị trí cố định, không bị ảnh hưởng bởi cuộn trang */
+  top: 0;
+  left: 0;
+  width: 100vw; /* Đặt chiều rộng bằng 100% chiều rộng của viewport */
+  height: 100vh; /* Đặt chiều cao là 100% chiều cao của viewport */
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; /* Đặt thứ tự hiển thị lớn hơn các element khác (mặc định là 0) */
+  background-color: rgba(255, 255, 255, 0.97);
+}
+
+.spinner {
+  /* Căn giữa nội dung trong spinner container */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

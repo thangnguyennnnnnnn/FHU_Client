@@ -1,0 +1,345 @@
+<app-header></app-header>
+<app-left-menu></app-left-menu>
+<main id="main" class="main">
+  <section class="section min-height-740">
+    <div class="row">
+      <div class="col-md-8">
+        <div *ngIf="isStep1" class="row">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Thêm thông tin tài khoản</h5>
+              <form class="row g-3">
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input
+                      #firstName
+                      type="text"
+                      class="form-control"
+                      id="firstname"
+                      placeholder="Họ"
+                      autocomplete="off"
+                    />
+                    <label for="firstname">Họ</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input
+                      #middleName
+                      type="text"
+                      class="form-control"
+                      id="middlename"
+                      placeholder="Tên đệm"
+                      autocomplete="off"
+                    />
+                    <label for="middlename">Tên đệm</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input
+                      #lastName
+                      type="text"
+                      class="form-control"
+                      id="lastname"
+                      placeholder="Tên"
+                      autocomplete="off"
+                    />
+                    <label for="lastname">Tên</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input
+                      #username
+                      type="username"
+                      class="form-control"
+                      id="username"
+                      placeholder="Tên người dùng"
+                      autocomplete="off"
+                    />
+                    <label for="username">Tên người dùng</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input
+                      #password
+                      type="password"
+                      class="form-control"
+                      id="password"
+                      placeholder="Mật khẩu"
+                      autocomplete="off"
+                    />
+                    <label for="password">Mật khẩu</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input
+                      #email
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      placeholder="Email"
+                      autocomplete="off"
+                    />
+                    <label for="email">Email</label>
+                  </div>
+                </div>
+                <div>
+                  <button
+                    #btnCreateAccount
+                    (click)="createAccount()"
+                    type="submit"
+                    class="btn fhc-button"
+                  >
+                    Tạo tài khoản
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="isStep2" class="row">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">
+                Thêm thông tin nhân viên & nơi làm việc
+              </h5>
+              
+              <form class="row g-3">
+                <div class="col-md-4">
+                  <div class="form-floating mb-3">
+                    <select
+                      class="form-select"
+                      id="employeeType"
+                      aria-label="Loại nhân viên"
+                      #roleId
+                      (change)="getPosition()"
+                    >
+                      <option value="">Chưa chọn</option>
+                      <option value="2">Bác sĩ</option>
+                      <option value="3">Y tá</option>
+                      <option value="5">Dược sĩ</option>
+                    </select>
+                    <label for="appointmentTime">Loại nhân viên</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input #facultyId type="text" hidden value="" />
+                    <input
+                      [(ngModel)]="facultyName"
+                      (ngModelChange)="searchFaculty()"
+                      #faculty
+                      (focus)="apIdFocus()"
+                      (blur)="apIdBlur()"
+                      type="text"
+                      class="form-control"
+                      name="name"
+                      placeholder="Loại khám"
+                      autocomplete="off"
+                      value=""
+                    />
+                    <label for="name">Loại khám</label>
+                  </div>
+                  <div *ngIf="isD" class="list-group slect-option-custom">
+                    <a
+                      *ngFor="let f of listFaculty"
+                      (mouseenter)="getFaculty(f.name, f.id)"
+                      type="button"
+                      class="list-group-item list-group-item-action"
+                      >{{ f.name }}</a
+                    >
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating mb-3">
+                    <select
+                      class="form-select"
+                      id="position"
+                      aria-label="Chức vụ"
+                      #positionId
+                    >
+                      <option value="">Chưa chọn</option>
+                      <option
+                        *ngFor="let p of listPosition"
+                        value="{{ p.posId }}"
+                      >
+                        {{ p.posName }}
+                      </option>
+                    </select>
+                    <label for="position">Chức vụ</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <select
+                      class="form-select"
+                      id="building"
+                      aria-label="Tòa nhà"
+                      #buildingId
+                      (change)="changeBuilding()"
+                    >
+                      <option value="">Chưa chọn</option>
+                      <option
+                        *ngFor="let b of buildingList"
+                        value="{{ b.buildingId }}"
+                      >
+                        {{ b.buildingName }}
+                      </option>
+                    </select>
+                    <label for="building">Tòa nhà</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <div class="form-floating">
+                      <select
+                        class="form-select"
+                        id="floor"
+                        aria-label="Tầng"
+                        #floorId
+                        (change)="changeFloor()"
+                      >
+                        <option value="">Chưa chọn</option>
+                        <option *ngFor="let f of listFloor" value="{{ f.id }}">
+                          Tầng {{ f.floor }}
+                        </option>
+                      </select>
+                      <label for="floor">Tầng</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <div class="form-floating">
+                      <select
+                        class="form-select"
+                        id="room"
+                        aria-label="Phòng"
+                        #roomId
+                      >
+                        <option value="">Chưa chọn</option>
+                        <option *ngFor="let r of listRoom" value="{{ r.id }}">
+                          Phòng {{ r.room }}
+                        </option>
+                      </select>
+                      <label for="room">Phòng</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <button
+                        (click)="createStaffInfo()"
+                        type="submit"
+                        class="btn fhc-button"
+                      >
+                        Tiếp theo
+                      </button>
+                    </div>
+                    <div class="col-md-4">
+                      <button
+                        #cancelBtn
+                        type="submit"
+                        class="btn fhc-button"
+                        disabled
+                      >
+                        Hủy
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="isStep3" class="row">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">
+                Thêm thông tin cá nhân
+              </h5>
+              <form class="row g-3"></form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-body min-height-550">
+            <div class="d-flex justify-content-center py-4">
+              <a href="#" class="logo d-flex align-items-center w-auto">
+                <img src="assets/img/logo.png" alt="" />
+                <span class="d-none d-lg-block">FPT Hospital Care</span>
+              </a>
+            </div>
+            <hr />
+            <div *ngIf="ishaveInfo">
+              <div class="row label-2">
+                <div class="col-lg-4 col-md-4 label">Mã nhân viên:</div>
+                <div class="col-lg-8 col-md-8">
+                  {{ userInformation.userId }}
+                </div>
+              </div>
+              <div class="row label-2">
+                <div class="col-lg-4 col-md-4 label">Tên:</div>
+                <div class="col-lg-8 col-md-8">
+                  {{ userInformation.firstName }}
+                  {{ userInformation.middleName }}
+                  {{ userInformation.lastName }}
+                </div>
+              </div>
+              <div class="row label-2">
+                <div class="col-lg-4 col-md-4 label">Tên người dùng:</div>
+                <div class="col-lg-8 col-md-8">
+                  {{ userInformation.username }}
+                </div>
+              </div>
+              <div class="row label-2">
+                <div class="col-lg-4 col-md-4 label">Email:</div>
+                <div class="col-lg-8 col-md-8">{{ userInformation.email }}</div>
+              </div>
+              <div class="row label-2">
+                <div class="col-lg-4 col-md-4 label">Mật khẩu:</div>
+                <div class="col-lg-8 col-md-8">
+                  {{ userInformation.password }}
+                </div>
+              </div>
+              <div *ngIf="isStep3">
+                <div class="row label-2">
+                  <div class="col-lg-4 col-md-4 label">Loại nhân viên:</div>
+                  <div class="col-lg-8 col-md-8">{{staffDisplay.roleName}}</div>
+                </div>
+                <div class="row label-2">
+                  <div class="col-lg-4 col-md-4 label">Phòng ban:</div>
+                  <div class="col-lg-8 col-md-8">{{staffDisplay.facultyName}}</div>
+                </div>
+                <div class="row label-2">
+                  <div class="col-lg-4 col-md-4 label">Chức vụ:</div>
+                  <div class="col-lg-8 col-md-8">{{staffDisplay.positionName}}</div>
+                </div>
+                <div class="row label-2">
+                  <div class="col-lg-4 col-md-4 label">Tòa nhà:</div>
+                  <div class="col-lg-8 col-md-8">{{staffDisplay.buildingName}}</div>
+                </div>
+                <div class="row label-2">
+                  <div class="col-lg-4 col-md-4 label">Tầng:</div>
+                  <div class="col-lg-8 col-md-8">{{staffDisplay.floorName}}</div>
+                </div>
+                <div class="row label-2">
+                  <div class="col-lg-4 col-md-4 label">Phòng:</div>
+                  <div class="col-lg-8 col-md-8">{{staffDisplay.roomName}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<app-footer></app-footer>

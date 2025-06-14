@@ -1,0 +1,26 @@
+.ip-none-bd {
+    border: none !important;
+}
+
+.min-height-550 {
+    min-height: 550px !important;
+}
+
+.mg-l-0 {
+    margin-left: 0px !important;
+}
+
+.label {
+    font-weight: 600;
+    color: rgba(1, 41, 112, 0.6);
+}
+
+.label-2  {
+    margin-bottom: 20px;
+    font-size: 15px;
+}
+
+.fullsize-img {
+    width: 100%;
+    height: 100%;
+}

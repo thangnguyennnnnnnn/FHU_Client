@@ -1,0 +1,34 @@
+.ip-none-bd {
+    border: none !important;
+}
+
+.min-height-460 {
+    min-height: 460px !important;
+}
+
+.min-height-500 {
+    min-height: 460px !important;
+}
+
+.mg-l-0 {
+    margin-left: 0px !important;
+}
+
+.label {
+    font-weight: 600;
+    color: rgba(1, 41, 112, 0.6);
+}
+
+.label-2  {
+    margin-bottom: 20px;
+    font-size: 15px;
+}
+
+.dp-result {
+    max-height: 680px;
+    overflow: overlay;
+}
+
+.pd-top-15 {
+    padding-top: 15px;
+}

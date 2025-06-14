@@ -1,0 +1,232 @@
+<app-header></app-header>
+<app-left-menu></app-left-menu>
+<main id="main" class="main">
+  <section class="section">
+    <div class="row">
+      <div *ngIf="!isD" class="col-lg-6">
+        <div class="card">
+          <div class="card-body min-height-550">
+            <div class="d-flex justify-content-center py-4">
+              <a href="#" class="logo d-flex align-items-center w-auto">
+                <img src="assets/img/logo.png" alt="" />
+                <span class="d-none d-lg-block">FPT Hospital Care</span>
+              </a>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="row label-2">
+                  <div class="col-lg-4 col-md-4 label">Mã khám bệnh:</div>
+                  <div class="col-lg-8 col-md-8">
+                    {{ appointmentModelDB.appointmentBeforId }}
+                  </div>
+                </div>
+                <div class="row label-2">
+                  <div class="col-lg-4 col-md-4 label">Bệnh nhân:</div>
+                  <div class="col-lg-8 col-md-8">
+                    {{ appointmentModelDB.fullname }}
+                  </div>
+                </div>
+                <div class="row label-2">
+                  <div class="col-lg-4 col-md-4 label">Địa chỉ:</div>
+                  <div class="col-lg-8 col-md-8">
+                    {{ appointmentModelDB.address }}
+                  </div>
+                </div>
+                <div class="row label-2">
+                  <div class="col-lg-4 col-md-4 label">Điện thoại:</div>
+                  <div class="col-lg-8 col-md-8">
+                    {{ appointmentModelDB.phone }}
+                  </div>
+                </div>
+                <div class="row label-2">
+                  <div class="col-lg-4 col-md-4 label">Người nhà:</div>
+                  <div class="col-lg-8 col-md-8">
+                    {{ appointmentModelDB.fullnameNT }}
+                  </div>
+                </div>
+                <div class="row label-2">
+                  <div class="col-lg-4 col-md-4 label">Địa chỉ (NN):</div>
+                  <div class="col-lg-8 col-md-8">
+                    {{ appointmentModelDB.addressNT }}
+                  </div>
+                </div>
+                <div class="row label-2">
+                  <div class="col-lg-4 col-md-4 label">ĐT người nhà:</div>
+                  <div class="col-lg-8 col-md-8">
+                    {{ appointmentModelDB.phoneNT }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="row label-2">
+                  <div class="col-lg-4 col-md-4 label">Loại khám:</div>
+                  <div class="col-lg-8 col-md-8">
+                    {{ appointmentModelDB.facultyName }}
+                  </div>
+                </div>
+                <div class="row label-2">
+                  <div class="col-lg-4 col-md-4 label">Triệu chứng:</div>
+                  <div class="col-lg-8 col-md-8">
+                    {{ appointmentModelDB.symptom }}
+                  </div>
+                </div>
+                <div class="row label-2">
+                  <div class="col-lg-4 col-md-4 label">Ngày khám:</div>
+                  <div class="col-lg-8 col-md-8">
+                    {{ appointmentModelDB.examinationDate }}
+                  </div>
+                </div>
+                <div class="row label-2">
+                  <div class="col-lg-4 col-md-4 label">Giờ khám:</div>
+                  <div class="col-lg-8 col-md-8">
+                    {{ appointmentModelDB.examinationTime }}
+                  </div>
+                </div>
+                <div class="row label-2">
+                  <div class="col-lg-4 col-md-4 label">Bác sĩ:</div>
+                  <div class="col-lg-8 col-md-8">
+                    {{ appointmentModelDB.doctorName }}
+                  </div>
+                </div>
+                <div class="row label-2">
+                  <div class="col-lg-4 col-md-4 label">Nơi khám:</div>
+                  <div class="col-lg-8 col-md-8">
+                    {{ appointmentModelDB.place }}
+                  </div>
+                </div>
+                <div class="row label-2">
+                  <div class="col-lg-4 col-md-4 label">Trạng thái:</div>
+                  <div class="col-lg-8 col-md-8">
+                    <span class="badge bg-success">
+                      <i class="bi bi-check-circle me-1"></i>
+                      {{ appointmentModelDB.status }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row label-2">
+                <div class="col-lg-4 col-md-4 label">Lời nhắn:</div>
+                <div class="col-lg-8 col-md-8">
+                  {{ message }}
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="col-12 text-center">
+                  <button [disabled]="appointmentModelDB.status !== 'Tạo thành công'" (click)="cancel(appointmentModelDB.appointmentBeforId)" type="button" class="btn fhc-button">
+                    <i class="bi bi-trash me-1"></i> Hủy
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Trung tâm phòng khám FHC</h5>
+
+            <!-- Slides with indicators -->
+            <div
+              id="carouselExampleIndicators"
+              class="carousel slide"
+              data-bs-ride="carousel"
+            >
+              <div class="carousel-indicators">
+                <button
+                  type="button"
+                  data-bs-target="#carouselExampleIndicators"
+                  data-bs-slide-to="0"
+                  class="active"
+                  aria-current="true"
+                  aria-label="Slide 1"
+                ></button>
+                <button
+                  type="button"
+                  data-bs-target="#carouselExampleIndicators"
+                  data-bs-slide-to="1"
+                  aria-label="Slide 2"
+                ></button>
+                <button
+                  type="button"
+                  data-bs-target="#carouselExampleIndicators"
+                  data-bs-slide-to="2"
+                  aria-label="Slide 3"
+                ></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img
+                    src="https://storage.googleapis.com/fhc-server-394702.appspot.com/carousel/fhc-slide-1.jpg"
+                    class="d-block w-100"
+                    alt="..."
+                  />
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>Với sự thành lập trên 2 tháng</h5>
+                    <p>
+                      Chúng tôi cam kết sẽ đem tới trải nghiệm thú vị và an
+                      toàn.
+                    </p>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="https://storage.googleapis.com/fhc-server-394702.appspot.com/carousel/fhc-slide-2.jpg"
+                    class="d-block w-100"
+                    alt="..."
+                  />
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>Các bác sĩ có trình độ cao</h5>
+                    <p>
+                      Sẵn sàng hoàn thành mọi nhiệm vụ. Cùng bệnh nhân vượt qua
+                      mọi thử thách.
+                    </p>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="https://storage.googleapis.com/fhc-server-394702.appspot.com/carousel/fhc-slide-3.jpg"
+                    class="d-block w-100"
+                    alt="..."
+                  />
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>Khẩu hiệu</h5>
+                    <p>Sức khỏe của người bệnh là quan trọng nhất.</p>
+                  </div>
+                </div>
+              </div>
+
+              <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev"
+              >
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next"
+              >
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<app-footer></app-footer>

@@ -1,0 +1,260 @@
+<header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="home" class="logo d-flex align-items-center">
+        <img src="assets/img/logo.png" alt="">
+        <span class="d-none d-lg-block">FHC</span>
+      </a>
+      <i onclick="handleLeftMenu()" class="bi bi-list toggle-sidebar-btn"></i>
+    </div>
+
+    <div class="search-bar">
+      <ul *ngIf="role == 1" class="sidebar-nav d-flex" id="sidebar-nav">
+        <li class="nav-item active">
+          <a class="nav-link collapsed" [ngClass]="{'fhc-active': page === 'Home'}" href="home">
+            <i class="bi bi-house-heart-fill"></i>
+            <span>Trang chủ</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" [ngClass]="{'fhc-active': page === 'danh-sach-nhan-vien'}" href="danh-sach-nhan-vien">
+            <i class="bi bi-person-vcard-fill"></i>
+            <span>Danh sách nhân viên</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" [ngClass]="{'fhc-active': page === 'them-nhan-vien'}" href="them-nhan-vien">
+            <i class="bi bi-person-plus-fill"></i>
+            <span>Thêm nhân viên</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" [ngClass]="{'fhc-active': page === 'xem-yeu-cau'}" href="xem-yeu-cau">
+            <i class="bi bi-window"></i>
+            <span>Yêu cầu</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" [ngClass]="{'fhc-active': page === 'fpt-hospital-management'}" href="fpt-hospital-management">
+            <i class="bi bi-person-video3"></i>
+            <span>Quản lý</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" [ngClass]="{'fhc-active': page === 'feedback'}" href="feedback">
+            <i class="bi bi-person-video2"></i>
+            <span>Feedback</span>
+          </a>
+        </li>
+      </ul>
+      <ul *ngIf="role == 2" class="sidebar-nav d-flex" id="sidebar-nav">
+        <li class="nav-item">
+          <a class="nav-link collapsed" [ngClass]="{'fhc-active': page === 'Home'}" href="home">
+            <i class="bi bi-house-heart-fill"></i>
+            <span>Trang chủ</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" [ngClass]="{'fhc-active': page === 'quet-ma-qr'}" href="quet-ma-qr">
+            <i class="bi bi-qr-code"></i>
+            <span>Quét mã QR</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" [ngClass]="{'fhc-active': page === 'phieu-chuan-doan'}" href="phieu-chuan-doan">
+            <i class="bi bi-search-heart"></i>
+            <span>Tìm kiếm phiếu chuẩn đoán</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" [ngClass]="{'fhc-active': page === 'lich-lam-viec'}" href="lich-lam-viec">
+            <i class="bi bi-calendar-month-fill"></i>
+            <span>Lịch làm việc</span>
+          </a>
+        </li>
+      </ul>
+      <ul *ngIf="role == 3" class="sidebar-nav d-flex" id="sidebar-nav">
+        <li class="nav-item">
+          <a class="nav-link collapsed" [ngClass]="{'fhc-active': page === 'Home'}" href="home">
+            <i class="bi bi-house-heart-fill"></i>
+            <span>Trang chủ</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" [ngClass]="{'fhc-active': page === 'quet-ma-qr'}" href="quet-ma-qr">
+            <i class="bi bi-qr-code"></i>
+            <span>Quét mã QR</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" [ngClass]="{'fhc-active': page === 'tim-kiem-lich-kham'}" href="tim-kiem-lich-kham">
+            <i class="bi bi-search-heart"></i>
+            <span>Tìm thẻ khám</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" [ngClass]="{'fhc-active': page === 'lich-lam-viec'}" href="lich-lam-viec">
+            <i class="bi bi-calendar-month-fill"></i>
+            <span>Lịch làm việc</span>
+          </a>
+        </li>
+      </ul>
+      <ul *ngIf="role == 4" class="sidebar-nav d-flex" id="sidebar-nav">
+        <li class="nav-item">
+          <a class="nav-link collapsed" [ngClass]="{'fhc-active': page === 'Home'}" href="home">
+            <i class="bi bi-house-heart-fill"></i>
+            <span>Trang chủ</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" [ngClass]="{'fhc-active': page === 'dang-ky-lich-kham'}" href="dang-ky-lich-kham">
+            <i class="bi bi-bag-plus-fill"></i>
+            <span>Đăng ký lịch khám</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" [ngClass]="{'fhc-active': page === 'lich-kham'}" href="lich-kham">
+            <i class="bi bi-card-list"></i>
+            <span>Lịch khám đã đăng ký</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" [ngClass]="{'fhc-active': page === 'danh-sach-nhan-vien'}" href="danh-sach-nhan-vien">
+            <i class="bi bi-search-heart"></i>
+            <span>Tìm kiếm y tá - bác sĩ</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" [ngClass]="{'fhc-active': page === 'phieu-chuan-doan'}" href="phieu-chuan-doan">
+            <i class="bi bi-capsule"></i>
+            <span>Xem thông tin chuẩn đoán</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" [ngClass]="{'fhc-active': page === 'the-kham-benh'}" href="the-kham-benh">
+            <i class="bi bi-person-vcard-fill"></i>
+            <span>Thẻ khám bệnh</span>
+          </a>
+        </li>
+      </ul>
+      <div class="search-form d-flex align-items-center">
+        <ul *ngIf="role == 5" class="sidebar-nav d-flex" id="sidebar-nav">
+          <li class="nav-item">
+            <a class="nav-link collapsed" [ngClass]="{'fhc-active': page === 'Home'}" href="home">
+              <i class="bi bi-house-heart-fill"></i>
+              <span>Trang chủ</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link collapsed" [ngClass]="{'fhc-active': page === 'lich-lam-viec'}" href="lich-lam-viec">
+              <i class="bi bi-calendar-month-fill"></i>
+              <span>Lịch làm việc</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link collapsed" [ngClass]="{'fhc-active': page === 'kho-thuoc'}" href="kho-thuoc">
+              <i class="bi bi-capsule"></i>
+              <span>Xem kho thuốc</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link collapsed" [ngClass]="{'fhc-active': page === 'xem-don-thuoc'}" href="xem-don-thuoc">
+              <i class="bi bi-prescription2"></i>
+              <span>Bốc thuốc</span>
+            </a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+        <li class="nav-item dropdown">
+
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-bell"></i>
+            <span *ngIf="numberNoti != 0" class="badge bg-danger badge-number">{{numberNoti}}</span>
+          </a>
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications fhc-noti">
+            <li class="dropdown-header">
+              Bạn có {{numberNoti}} thông báo!
+              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Xem tất cả</span></a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <ng-container *ngFor="let msg of notiList">
+              <li (click)="gotoLink(msg.link, msg.notiId)" class="notification-item fhc-noti" [ngClass]="{'fhc-unread': msg.readed === '2'}">
+                <i class="bi bi-lightbulb text-primary"></i>
+                <div>
+                  <h4>Hệ thống</h4>
+                  <p>{{msg.content}}</p>
+                  <p>{{msg.time}}</p>
+                </div>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+            </ng-container>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+          </ul>
+
+        </li>
+
+        <li class="nav-item dropdown pe-3">
+
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <img src="{{avt}}" alt="Profile" class="header-avt">
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{getRoleName()}}: {{userDisplay}}</span>
+          </a>
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6>{{userDisplay}}</h6>
+              <span>{{getRoleName()}}</span>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="trang-ca-nhan">
+                <i class="bi bi-person"></i>
+                <span>Thông tin cá nhân</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+                <i class="bi bi-question-circle"></i>
+                <span>Cần hỗ trợ?</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <button class="dropdown-item d-flex align-items-center" (click)="logout()">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Đăng xuất</span>
+              </button>
+            </li>
+
+          </ul>
+        </li>
+
+      </ul>
+    </nav>
+    <div #notiContent id="notification" class="notification"></div>
+</header>

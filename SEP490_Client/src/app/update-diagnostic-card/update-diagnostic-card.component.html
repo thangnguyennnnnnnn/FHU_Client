@@ -1,0 +1,296 @@
+<app-header></app-header>
+<app-left-menu></app-left-menu>
+<main id="main" class="main">
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Thông tin chuẩn đoán</h5>
+            <hr />
+            <form class="row g-3">
+              <div class="col-md-4">
+                <div class="form-floating">
+                  <input
+                    #appointmentId
+                    type="text"
+                    class="form-control"
+                    id="appointmentId"
+                    placeholder="Mã lịch khám"
+                    autocomplete="off"
+                    value=""
+                    disabled
+                  />
+                  <label for="appointmentId">Mã lịch khám</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-floating">
+                  <input
+                    #name
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    placeholder="Tên bệnh nhân"
+                    autocomplete="off"
+                    value=""
+                    disabled
+                  />
+                  <label for="name">Tên bệnh nhân</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-floating">
+                  <input
+                    #phone
+                    type="text"
+                    class="form-control"
+                    id="phone"
+                    placeholder="Số điện thoại bệnh nhân"
+                    autocomplete="off"
+                    value=""
+                    disabled
+                  />
+                  <label for="phone">Số điện thoại bệnh nhân</label>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-floating">
+                  <textarea
+                    #diagnosticResult
+                    type="text"
+                    class="form-control"
+                    id="diagnosticResult"
+                    placeholder="Kết quả chuẩn đoán"
+                    autocomplete="off"
+                    value=""
+                    rows="5"
+                    style="height: 300px;"
+                  ></textarea>
+                  <label for="diagnosticResult">Kết quả chuẩn đoán</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-floating mb-3">
+                    <input
+                    #dayOfReview
+                    type="date"
+                    class="form-control"
+                    id="dayOfReview"
+                    placeholder="Ngày tái khám (nếu có)"
+                    autocomplete="off"
+                    value="Không"
+                  />
+                  <label for="dayOfReview">Ngày tái khám (nếu có)</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-floating mb-3">
+                  <select
+                    class="form-select"
+                    id="diagnosticStatus"
+                    aria-label="Trạng thái"
+                    (change)="checkStatus()"
+                    #diagnosticStatus>
+                    <option value="8">Đợi khám</option>
+                    <option value="0">Đang khám</option>
+                    <option value="1">Ổn định - Không vấn đề</option>
+                    <option value="2">Uống thuốc theo chỉ định</option>
+                    <option value="3">Nhập viện điều trị</option>
+                    
+                  </select>
+                  <label for="diagnosticStatus">Trạng thái</label>
+                </div>
+              </div>
+              <div class="col-md-4 text-center">
+                <div class="form-floating mg-top-8">
+                  <button (click)="updateDiagnostic()" type="button" class="btn fhc-button">
+                    <i class="bi bi-pencil-square me-1"></i> Cập nhật
+                  </button>
+                  <button *ngIf="isAddMedicines" (click)="openPopup(diagnosticDisplay.appointmentId)" type="button" class="btn fhc-button ml-5">
+                    <i class="bi bi-card-checklist me-1"></i> Tạo đơn thuốc
+                  </button>
+                </div>
+              </div>
+              <hr />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<app-footer></app-footer>
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <section class="section">
+      <h1 class="card-title-3 text-center">
+        Đơn thuốc
+      </h1>
+      <hr />
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <form class="row g-3">
+                      <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                          <input
+                            #appoinmentId
+                            type="text"
+                            class="form-control"
+                            placeholder="ID Lịch hẹn"
+                            autocomplete="off"
+                            value=""
+                            disabled
+                          />
+                          <label>ID Lịch hẹn</label>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-floating">
+                          <input
+                            #medicineName
+                            type="text"
+                            class="form-control"
+                            placeholder="Tên thuốc"
+                            autocomplete="off"
+                            value=""
+                          />
+                          <label>Tên thuốc</label>
+                        </div>
+                      </div>
+                      <div class="col-lg-4">
+                        <button (click)="searchMedicine()" type="button" class="btn fhc-button ml-5">
+                          <i class="bi bi-search me-1"></i> Tìm thuốc
+                        </button>
+                      </div>
+                      <div class="col-lg-4">
+                        <button (click)="createPrescription(prescriptionList)" [disabled]="prescriptionListSize == 0" type="button" class="btn fhc-button ml-5">
+                          <i class="bi bi-plus-circle-dotted me-1"></i> Tạo đơn thuốc
+                        </button>
+                      </div>
+                      <div class="col-lg-4">
+                        <button (click)="close()" type="button" class="btn fhc-button ml-5">
+                          <i class="bi bi-x-circle me-1"></i> Thoát
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="card">
+                <div class="card-body table-card-2">
+                  <div class="row mg-t-10px">
+                    <div *ngFor="let medicine of listMedicine" class="col-lg-6">
+                      <div class="card">
+                        <div class="card-body item-card-2">
+                          <h1 class="card-title-3 text-center fs-15">
+                            {{ medicine.name }}
+                          </h1>
+                          <hr />
+                          <div class="row label-2 div-img">
+                            <img class="img-medicine" src="{{ medicine.urlImage }}" />
+                          </div>
+                          <div class="row label-2">
+                            <div class="col-lg-4 col-md-4 label">Xuất xứ:</div>
+                            <div class="col-lg-8 col-md-8">
+                              {{ medicine.producer }}
+                            </div>
+                          </div>
+                          <div class="row label-2">
+                            <div class="col-lg-4 col-md-4 label">Mô tả:</div>
+                            <div class="col-lg-8 col-md-8 fhc-medicine-descript">
+                              {{ medicine.description }}
+                            </div>
+                          </div>
+                          <div class="row text-center">
+                            <div class="col-lg-12 col-md-12">
+                              <button
+                                (click)="addToPrescription(medicine)"
+                                type="button"
+                                class="btn fhc-button"
+                              >
+                                <i class="bi bi-bag-plus me-1"></i>
+                                Thêm vào đơn thuốc
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-body table-card-3">
+              <h1 class="card-title-3 text-center fs-15">
+                Thông tin đơn thuốc
+              </h1>
+              <hr />
+              <div *ngFor="let m of prescriptionList" class="card mb-3">
+                <div class="row g-0">
+                  <div class="col-md-3">
+                    <img src="{{m.urlImage}}" class="img-fluid rounded-start" alt="...">
+                  </div>
+                  <div class="col-md-6">
+                    <div class="card-body">
+                      <h5 class="card-title">{{m.name}}</h5>
+                      <p class="card-text">{{m.description}}</p>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-btn">
+                      <button (click)="removeMedicine(m)" type="button" class="btn fhc-button ml-5">
+                        <i class="bi bi-x-circle me-1"></i> Gỡ
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-floating">
+                      <textarea id="medicine_{{m.id}}" class="form-control"></textarea>
+                      <label>Ghi chú</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-9">
+                  <div class="form-floating">
+                    <textarea #note class="form-control" style="height: 100px"></textarea>
+                    <label>Ghi chú</label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-floating">
+                    <select #numberDay class="form-select" aria-label="Default select example">
+                      <option selected value="">Vui lòng chọn 1</option>
+                      <option value="3">3 ngày</option>
+                      <option value="5">5 ngày</option>
+                      <option value="7">7 ngày</option>
+                      <option value="10">10 ngày</option>
+                    </select>
+                    <label for="examinationTime">Số ngày uống</label>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

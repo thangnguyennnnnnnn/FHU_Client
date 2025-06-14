@@ -1,0 +1,195 @@
+<aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="home">
+          <i class="bi bi-house-door"></i>
+          <span>Trang chủ</span>
+        </a>
+      </li>
+
+      <li *ngIf="role == 1" class="nav-item">
+        <a class="nav-link " data-bs-target="#components-adm" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-person"></i><span>Quản trị viên</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="components-adm" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="danh-sach-nhan-vien">
+              <i class="bi bi-circle"></i><span>Danh sách nhân viên </span>
+            </a>
+          </li>
+          <li>
+            <a href="them-nhan-vien">
+              <i class="bi bi-circle"></i><span>Thêm nhân viên </span>
+            </a>
+          </li>
+          <li>
+            <a href="quan-tri-he-thong">
+              <i class="bi bi-circle"></i><span>Quản trị hệ thống </span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li *ngIf="role == 2" class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-doctor" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-person-square"></i><span>Bác sĩ</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-doctor" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="phieu-chuan-doan">
+              <i class="bi bi-circle"></i><span>Tìm kiếm phiếu chuẩn đoán </span>
+            </a>
+          </li>
+          <li>
+            <a href="quet-ma-qr">
+              <i class="bi bi-circle"></i><span>Quét mã QR </span>
+            </a>
+          </li>
+          <li>
+            <a href="lich-lam-viec">
+              <i class="bi bi-circle"></i><span>Lịch làm việc </span>
+            </a>
+          </li>
+          <li>
+            <a href="lich-truc">
+              <i class="bi bi-circle"></i><span>Lịch trực </span>
+            </a>
+          </li>
+          <li>
+            <a href="dang-ky-lich-lam-viec">
+              <i class="bi bi-circle"></i><span>Đăng ký lịch làm việc / trực </span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li *ngIf="role == 3" class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-yta" data-bs-toggle="collapse" href="#">
+          <i class="bx bx-female"></i><span>Y tá</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-yta" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="tim-kiem-lich-kham">
+              <i class="bi bi-circle"></i><span>Tìm thẻ khám</span>
+            </a>
+          </li>
+          <li>
+            <a href="quet-ma-qr">
+              <i class="bi bi-circle"></i><span>Quét mã QR </span>
+            </a>
+          </li>
+          <li>
+            <a href="lich-lam-viec">
+              <i class="bi bi-circle"></i><span>Lịch làm việc </span>
+            </a>
+          </li>
+          <li>
+            <a href="lich-truc">
+              <i class="bi bi-circle"></i><span>Lịch trực </span>
+            </a>
+          </li>
+          <li>
+            <a href="dang-ky-lich-lam-viec">
+              <i class="bi bi-circle"></i><span>Đăng ký lịch làm việc / trực </span>
+            </a>
+          </li>
+          <li>
+            <a href="thong-tin-dung-cu-y-te">
+              <i class="bi bi-circle"></i><span>Thông tin dụng cụ y tế </span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li *ngIf="role == 5" class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-ds" data-bs-toggle="collapse" href="#">
+          <i class="bx bx-female"></i><span>Dược sĩ</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-ds" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="lich-lam-viec">
+              <i class="bi bi-circle"></i><span>Lịch làm việc </span>
+            </a>
+          </li>
+          <li>
+            <a href="lich-truc">
+              <i class="bi bi-circle"></i><span>Lịch trực </span>
+            </a>
+          </li>
+          <li>
+            <a href="dang-ky-lich-lam-viec">
+              <i class="bi bi-circle"></i><span>Đăng ký lịch làm việc / trực </span>
+            </a>
+          </li>
+          <li>
+            <a href="kho-thuoc">
+              <i class="bi bi-circle"></i><span>Xem kho thuốc </span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li *ngIf="role == 4" class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#form-bn" data-bs-toggle="collapse" href="#">
+          <i class="bx bxs-user-account"></i><span>Bệnh nhân</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="form-bn" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="dang-ky-lich-kham">
+              <i class="bi bi-circle"></i><span>Đăng ký lịch khám </span>
+            </a>
+          </li>
+          <li>
+            <a href="lich-kham">
+              <i class="bi bi-circle"></i><span>Lịch khám đã đăng ký</span>
+            </a>
+          </li>
+          <li>
+            <a href="danh-sach-nhan-vien">
+              <i class="bi bi-circle"></i><span>Tìm kiếm y tá - bác sĩ </span>
+            </a>
+          </li>
+          <li>
+            <a href="phieu-chuan-doan">
+              <i class="bi bi-circle"></i><span>Xem thông tin chuẩn đoán</span>
+            </a>
+          </li>
+          <li>
+            <a href="the-kham-benh">
+              <i class="bi bi-circle"></i><span>Thẻ khám bệnh</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+          <i class="ri ri-list-unordered"></i><span>Chung</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="charts-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="thong-tin-ca-nhan">
+              <i class="bi bi-circle"></i><span>Thông tin cá nhân </span>
+            </a>
+          </li>
+          <li>
+            <a href="gop-y">
+              <i class="bi bi-circle"></i><span>Góp ý</span>
+            </a>
+          </li>
+          <li>
+            <a href="lien-he">
+              <i class="bi bi-circle"></i><span>Liên hệ</span>
+            </a>
+          </li>
+          <li>
+            <a (click)="logout()" href="#">
+              <i class="bi bi-circle"></i><span>Đăng xuất</span>
+            </a>
+          </li>
+        </ul>
+    </li>
+    </ul>
+</aside>

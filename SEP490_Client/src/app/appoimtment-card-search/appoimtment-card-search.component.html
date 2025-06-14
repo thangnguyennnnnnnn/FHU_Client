@@ -1,0 +1,362 @@
+<app-header></app-header>
+<app-left-menu></app-left-menu>
+<main id="main" class="main">
+  <section class="section min-height-740">
+    <div *ngIf="checkAuthor != ''" class="row">
+      <div class="col-lg-8">
+        <div class="card">
+          <div class="card-body min-height-550">
+            <hr />
+            <div class="row">
+              <form class="row g-3">
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input
+                      #appointmentId
+                      type="text"
+                      class="form-control"
+                      id="appointmentId"
+                      placeholder="Mã lịch khám"
+                      autocomplete="off"
+                      value=""
+                    />
+                    <label for="appointmentId">Mã lịch khám</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating mb-3">
+                    <select
+                      class="form-select"
+                      id="appointmentTime"
+                      aria-label="Giờ khám"
+                      #appointmentTime
+                    >
+                      <option value="">Chưa chọn</option>
+                      <option value="8:00 - 9:00 (AM)">
+                        8:00 - 9:00 (Ca sáng)
+                      </option>
+                      <option value="9:00 - 10:00 (AM)">
+                        9:00 - 10:00 (Ca sáng)
+                      </option>
+                      <option value="10:00 - 11:00 (AM)">
+                        10:00 - 11:00 (Ca sáng)
+                      </option>
+                      <option value="11:00 - 12:00 (AM)">
+                        11:00 - 12:00 (Ca sáng)
+                      </option>
+                      <option value="13:00 - 14:00 (PM)">
+                        13:00 - 14:00 (Ca chiều)
+                      </option>
+                      <option value="14:00 - 15:00 (PM)">
+                        14:00 - 15:00 (Ca chiều)
+                      </option>
+                      <option value="15:00 - 16:00 (PM)">
+                        15:00 - 16:00 (Ca chiều)
+                      </option>
+                      <option value="16:00 - 17:00 (PM)">
+                        16:00 - 17:00 (Ca chiều)
+                      </option>
+                    </select>
+                    <label for="appointmentTime">Giờ khám</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="appointmentDate"
+                      placeholder="Ngày khám"
+                      autocomplete="off"
+                      #appointmentDate
+                      value=""
+                    />
+                    <label for="appointmentDate">Ngày khám</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="name"
+                      placeholder="Tên bệnh nhân"
+                      autocomplete="off"
+                      #patientName
+                      value=""
+                    />
+                    <label for="name">Tên bệnh nhân</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input #facultyId type="text" hidden value="" />
+                    <input
+                      [(ngModel)]="facultyName"
+                      (ngModelChange)="searchFaculty()"
+                      #faculty
+                      (focus)="apIdFocus()"
+                      (blur)="apIdBlur()"
+                      type="text"
+                      class="form-control"
+                      name="name"
+                      placeholder="Loại khám"
+                      autocomplete="off"
+                      value=""
+                    />
+                    <label for="name">Loại khám</label>
+                  </div>
+                  <div *ngIf="isD" class="list-group slect-option-custom">
+                    <a
+                      *ngFor="let f of listFaculty"
+                      (mouseenter)="getFaculty(f.name, f.id)"
+                      type="button"
+                      class="list-group-item list-group-item-action"
+                      >{{ f.name }}</a
+                    >
+                  </div>
+                </div>
+                <div class="col-md-4 text-center">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-floating mg-top-8">
+                        <button
+                          (click)="searchAppoinment()"
+                          type="button"
+                          class="btn fhc-button"
+                        >
+                          <i class="bx bx-search-alt-2 me-1"></i> Tìm kiếm
+                        </button>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div *ngIf="role != 2" class="form-floating mg-top-8">
+                        <button
+                          (click)="changeStatusAP(changID)"
+                          type="button"
+                          class="btn fhc-button"
+                          [disabled]="isBtnConfirmDisabled"
+                        >
+                          <i class="bi bi-check-circle-fill me-1"></i> Xác nhận
+                        </button>
+                      </div>
+                      <div *ngIf="role == 2" class="form-floating mg-top-8">
+                        <button
+                          (click)="openCancelPopup()"
+                          type="button"
+                          class="btn fhc-button"
+                          [disabled]="isBtnConfirmDisabled"
+                        >
+                          <i class="bi bi-check-circle-fill me-1"></i> Hủy
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr />
+                <div class="col-lg-12">
+                  <div class="row fhc-app-custom">
+                    <div
+                      *ngFor="let ap of listAppointmentModel"
+                      class="col-lg-3"
+                    >
+                      <div class="card">
+                        <div class="card-body">
+                          <h1 class="card-title-2 text-center fs-15">
+                            Thông tin thẻ khám
+                          </h1>
+                          <hr />
+                          <div class="row label-2">
+                            <div class="col-lg-12 col-md-12 label">
+                              <i class="bi bi-bookmark-star-fill me-1"></i
+                              >{{ ap.appointmentBeforId }}
+                            </div>
+                          </div>
+                          <div class="row label-2">
+                            <div class="col-lg-12 col-md-12 label">
+                              <i class="bi bi-person-fill me-1"></i
+                              >{{ ap.fullname }}
+                            </div>
+                          </div>
+                          <div class="row label-2">
+                            <div class="col-lg-12 col-md-12 label">
+                              <i class="bi bi-calendar-date-fill me-1"></i
+                              >{{ ap.examinationDate }}
+                            </div>
+                          </div>
+                          <div class="row label-2">
+                            <div class="col-lg-12 col-md-12 label">
+                              <i class="bi bi-alarm-fill me-1"></i
+                              >{{ ap.examinationTime }}
+                            </div>
+                          </div>
+                          <div class="row text-center">
+                            <div class="col-lg-12 col-md-12">
+                              <button
+                                (click)="
+                                  viewAppointmentDetail(ap.appointmentBeforId)
+                                "
+                                type="button"
+                                class="btn fhc-button"
+                              >
+                                <i class="bi bi-arrow-right-square me-1"></i>
+                                Chi tiết
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-body min-height-550">
+            <div class="d-flex justify-content-center py-4">
+              <a href="#" class="logo d-flex align-items-center w-auto">
+                <img src="assets/img/logo.png" alt="" />
+                <span class="d-none d-lg-block">FPT Hospital Care</span>
+              </a>
+            </div>
+            <hr />
+            <div *ngIf="isDisplayAPMD">
+              <div class="row label-2">
+                <div class="col-lg-4 col-md-4 label">Mã khám bệnh:</div>
+                <div class="col-lg-8 col-md-8">
+                  {{ appointmentModelDB.appointmentBeforId }}
+                </div>
+              </div>
+              <div class="row label-2">
+                <div class="col-lg-4 col-md-4 label">Bệnh nhân:</div>
+                <div class="col-lg-8 col-md-8">
+                  {{ appointmentModelDB.fullname }}
+                </div>
+              </div>
+              <div class="row label-2">
+                <div class="col-lg-4 col-md-4 label">Địa chỉ:</div>
+                <div class="col-lg-8 col-md-8">
+                  {{ appointmentModelDB.address }}
+                </div>
+              </div>
+              <div class="row label-2">
+                <div class="col-lg-4 col-md-4 label">Điện thoại:</div>
+                <div class="col-lg-8 col-md-8">
+                  {{ appointmentModelDB.phone }}
+                </div>
+              </div>
+              <div class="row label-2">
+                <div class="col-lg-4 col-md-4 label">Người nhà:</div>
+                <div class="col-lg-8 col-md-8">
+                  {{ appointmentModelDB.fullnameNT }}
+                </div>
+              </div>
+              <div class="row label-2">
+                <div class="col-lg-4 col-md-4 label">Địa chỉ (NN):</div>
+                <div class="col-lg-8 col-md-8">
+                  {{ appointmentModelDB.addressNT }}
+                </div>
+              </div>
+              <div class="row label-2">
+                <div class="col-lg-4 col-md-4 label">ĐT người nhà:</div>
+                <div class="col-lg-8 col-md-8">
+                  {{ appointmentModelDB.phoneNT }}
+                </div>
+              </div>
+              <div class="row label-2">
+                <div class="col-lg-4 col-md-4 label">Loại khám:</div>
+                <div class="col-lg-8 col-md-8">
+                  {{ appointmentModelDB.facultyName }}
+                </div>
+              </div>
+              <div class="row label-2">
+                <div class="col-lg-4 col-md-4 label">Triệu chứng:</div>
+                <div class="col-lg-8 col-md-8">
+                  {{ appointmentModelDB.symptom }}
+                </div>
+              </div>
+              <div class="row label-2">
+                <div class="col-lg-4 col-md-4 label">Ngày khám:</div>
+                <div class="col-lg-8 col-md-8">
+                  {{ appointmentModelDB.examinationDate }}
+                </div>
+              </div>
+              <div class="row label-2">
+                <div class="col-lg-4 col-md-4 label">Giờ khám:</div>
+                <div class="col-lg-8 col-md-8">
+                  {{ appointmentModelDB.examinationTime }}
+                </div>
+              </div>
+              <div class="row label-2">
+                <div class="col-lg-4 col-md-4 label">Bác sĩ:</div>
+                <div class="col-lg-8 col-md-8">
+                  {{ appointmentModelDB.doctorName }}
+                </div>
+              </div>
+              <div class="row label-2">
+                <div class="col-lg-4 col-md-4 label">Nơi khám:</div>
+                <div class="col-lg-8 col-md-8">
+                  {{ appointmentModelDB.place }}
+                </div>
+              </div>
+              <div class="row label-2">
+                <div class="col-lg-4 col-md-4 label">Trạng thái:</div>
+                <div class="col-lg-8 col-md-8">
+                  <span class="badge bg-success">
+                    <i class="bi bi-check-circle me-1"></i>
+                    {{ appointmentModelDB.status }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<app-footer></app-footer>
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <section class="section profile">
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="card fhc-card">
+            <div class="profile-overview card-body pt-2">
+              <h5 class="card-title">Thông tin</h5>
+              <div class="row g-3">
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <textarea
+                      style="height: 100px"
+                      #reason
+                      class="form-control"
+                      placeholder="Lý do"
+                      autocomplete="off"
+                      value=""
+                    ></textarea>
+                    <label for="onDate">Lý do</label>
+                  </div>
+                </div>
+                <button
+                  (click)="cancel(appointmentModelDB)"
+                  type="button"
+                  class="btn fhc-button ml-5"
+                >
+                  Nhắn cho bệnh nhân
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button (click)="close()" type="button" class="btn fhc-button ml-5">
+        <i class="bi bi-x-circle me-1"></i> Thoát
+      </button>
+    </section>
+  </div>
+</div>

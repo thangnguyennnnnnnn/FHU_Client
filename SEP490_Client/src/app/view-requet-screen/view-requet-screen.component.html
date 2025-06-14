@@ -1,0 +1,237 @@
+<app-header></app-header>
+<app-left-menu></app-left-menu>
+<main id="main" class="main">
+  <section class="section min-height-740">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Yêu cầu</h5>
+            <hr />
+            <form class="row g-3">
+              <div class="col-md-4">
+                <div class="form-floating">
+                  <input
+                    #reportMonth
+                    type="text"
+                    class="form-control"
+                    placeholder="Tháng yêu cầu"
+                    autocomplete="off"
+                  />
+                  <label>Tháng yêu cầu</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-floating">
+                  <input
+                    #reportYear
+                    type="text"
+                    class="form-control"
+                    placeholder="Năm yêu cầu"
+                    autocomplete="off"
+                  />
+                  <label>Năm yêu cầu</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-floating">
+                    <select (change)="filterType()" #type class="form-select" aria-label="Default select example">
+                        <option *ngIf="role == 1" value="1">Đơn nhập thuốc - Đã chấp thuận</option>
+                        <option *ngIf="role == 1" value="2">Đơn nhập thuốc - Chưa chấp thuận</option>
+                        <option value="3">Đơn nghỉ phép</option>
+                      </select>
+                  <label>Loại</label>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <button
+                  (click)="searchMedicineReport_Request(2)"
+                  type="button"
+                  class="btn fhc-button"
+                >
+                  <i class="bi bi-search me-1"></i> Tìm kiếm
+                </button>
+              </div>
+              <div
+                *ngFor="let f of filenameRequest"
+                class="row g-3 fhc-search-report"
+              >
+                <div class="col-md-3">
+                  <div class="form-floating dp-fl">
+                    <input
+                      #nameFile
+                      type="text"
+                      class="form-control"
+                      placeholder="Tên file"
+                      autocomplete="off"
+                      disabled
+                      value="{{ f.filename }}"
+                    />
+                    <label>Tên</label>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-floating dp-fl">
+                    <input
+                      #nameFile
+                      type="text"
+                      class="form-control"
+                      placeholder="Tên file"
+                      autocomplete="off"
+                      disabled
+                      value="{{ f.createUser }}"
+                    />
+                    <label>Người tạo</label>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-floating dp-fl">
+                    <input
+                      #nameFile
+                      type="text"
+                      class="form-control"
+                      placeholder="Tên file"
+                      autocomplete="off"
+                      disabled
+                      value="{{ f.createDate }}"
+                    />
+                    <label>Ngày tạo</label>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-floating dp-fl">
+                      <input
+                        #nameFile
+                        type="text"
+                        class="form-control"
+                        placeholder="Tên file"
+                        autocomplete="off"
+                        disabled
+                        value="{{ f.approvedDate }}"
+                      />
+                      <label>Ngày chấp thuận</label>
+                    </div>
+                  </div>
+                <div class="col-md-3">
+                  <button *ngIf="f.filename != 'Nghỉ phép'"
+                    (click)="downloadFile(f.filename)"
+                    type="button"
+                    class="btn fhc-button ml-5"
+                    title="Tải file xuống"
+                  >
+                    <i class="bi bi-download me-1"></i>
+                  </button>
+                  <button *ngIf="f.filename == 'Nghỉ phép'"
+                    type="button"
+                    class="btn fhc-button ml-5"
+                    title=""
+                    (click)="detail(f)"
+                  >
+                    Chi tiết
+                  </button>
+                  <button
+                    *ngIf="f.approved == '2' && f.filename == 'Nghỉ phép'"
+                    (click)="approveRequest(f.createDate, f.createUserId, '3')"
+                    type="button"
+                    class="btn fhc-button ml-5"
+                    title="Chấp thuận"
+                  >
+                    <i class="bi bi-upload me-1"> Chấp thuận</i>
+                  </button>
+                  <button
+                    *ngIf="f.approved == '2' && f.filename != 'Nghỉ phép'"
+                    (click)="approveRequest(f.filename, f.createUserId)"
+                    type="button"
+                    class="btn fhc-button ml-5"
+                    title="Chấp thuận"
+                  >
+                    <i class="bi bi-upload me-1"> Chấp thuận</i>
+                  </button>
+                  <button
+                    *ngIf="f.approved == '1'"
+                    type="button"
+                    class="btn fhc-button ml-5"
+                    title="Đã chấp thuận"
+                    disabled
+                  >
+                    <i class="bi bi-upload me-1"> Chấp thuận</i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn fhc-button ml-5"
+                    title="Hủy"
+                  >
+                    Hủy
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<app-footer></app-footer>
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <section class="section profile">
+      <div class="row">
+          <div class="col-xl-12">
+              <div class="card fhc-card">
+                  <div class="profile-overview card-body pt-2">
+                    <h5 class="card-title">Thông tin</h5>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 label ">Loại</div>
+                                <div class="col-lg-8 col-md-8">Nghỉ phép</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 label">Người tạo</div>
+                                <div class="col-lg-8 col-md-8">{{item.staffId}}</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 label">Ngày nghỉ</div>
+                                <div class="col-lg-8 col-md-8">{{item.offDate}}</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 label">Thời gian tạo</div>
+                                <div class="col-lg-8 col-md-8">{{item.createTime}}</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 label">Thời gian chấp thuận</div>
+                                <div class="col-lg-8 col-md-8">{{item.approveTime}}</div>
+                            </div>
+                        </div>   
+                        <div class="col-lg-6">
+                          <div class="row">
+                              <div class="col-lg-4 col-md-4 label">Người chấp thuận</div>
+                              <div class="col-lg-8 col-md-8">{{item.approverId}}</div>
+                          </div>
+                      </div>   
+                      <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 label">Lý do</div>
+                            <div class="col-lg-8 col-md-8">{{item.reason}}</div>
+                        </div>
+                    </div>                         
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <button (click)="close()" type="button" class="btn fhc-button ml-5">
+        <i class="bi bi-x-circle me-1"></i> Thoát
+      </button>
+  </section>
+  </div>
+</div>

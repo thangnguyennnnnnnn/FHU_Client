@@ -1,0 +1,578 @@
+<app-header></app-header>
+<app-left-menu></app-left-menu>
+<main id="main" class="main">
+  <section class="section min-height-740">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <form class="row g-3">
+                <div class="col-md-2">
+                  <div class="form-floating">
+                    <input
+                      #name
+                      type="text"
+                      class="form-control"
+                      placeholder="Tên thuốc"
+                      autocomplete="off"
+                      value=""
+                    />
+                    <label>Tên thuốc</label>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-floating mb-3">
+                    <input
+                      #ingredients
+                      type="text"
+                      class="form-control"
+                      placeholder="Thành phần"
+                      autocomplete="off"
+                      value=""
+                    />
+                    <label>Thành phần</label>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-floating">
+                    <input
+                      #uses
+                      type="text"
+                      class="form-control"
+                      placeholder="Công dụng"
+                      autocomplete="off"
+                      value=""
+                    />
+                    <label>Công dụng</label>
+                  </div>
+                </div>
+                <div class="col-md-1">
+                  <div class="form-floating">
+                    <input
+                      #quantity
+                      type="number"
+                      class="form-control"
+                      placeholder="Số lượng"
+                      autocomplete="off"
+                      value=""
+                    />
+                    <label>Số lượng</label>
+                  </div>
+                </div>
+                <div class="col-lg-5">
+                  <button
+                    (click)="searchMedicine()"
+                    type="button"
+                    class="btn fhc-button"
+                  >
+                    <i class="bx bx-search-alt-2 me-1"></i> Tìm kiếm
+                  </button>
+                  <button
+                    (click)="drugImportRequestShow()"
+                    type="button"
+                    class="btn fhc-button ml-5"
+                  >
+                    <i class="bi bi-plus-square me-1"></i> Nhập thuốc
+                  </button>
+                  <button
+                    (click)="showPopupImport()"
+                    type="button"
+                    class="btn fhc-button ml-5"
+                  >
+                    <i class="bi bi-patch-plus me-1"></i> Thêm mới
+                  </button>
+                  <button
+                    (click)="showPopupReport()"
+                    type="button"
+                    class="btn fhc-button ml-5"
+                  >
+                    <i class="bi bi-printer me-1"></i> Xuất báo cáo
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="listDisplay != 0" class="col-lg-12">
+        <div class="card">
+          <div class="card-body table-card">
+            <div class="row mg-t-10px">
+              <div *ngFor="let medicine of listMedicine" class="col-lg-3">
+                <div class="card">
+                  <div class="card-body item-card">
+                    <h1 class="card-title-3 text-center fs-15">
+                      {{ medicine.name }}
+                    </h1>
+                    <hr />
+                    <div class="row label-2 div-img">
+                      <img class="img-medicine" src="{{ medicine.urlImage }}" />
+                    </div>
+                    <div class="row label-2">
+                      <div class="col-lg-4 col-md-4 label">Xuất xứ:</div>
+                      <div class="col-lg-8 col-md-8">
+                        {{ medicine.producer }}
+                      </div>
+                    </div>
+                    <div class="row label-2">
+                      <div class="col-lg-4 col-md-4 label">Mô tả:</div>
+                      <div class="col-lg-8 col-md-8 fhc-medicine-descript">
+                        {{ medicine.description }}
+                      </div>
+                    </div>
+                    <div class="row label-2">
+                      <div class="col-lg-4 col-md-4 label">Số lượng:</div>
+                      <div class="col-lg-8 col-md-8">
+                        {{ medicine.quantity }} {{ medicine.unit }}
+                      </div>
+                    </div>
+                    <div class="row text-center">
+                      <div class="col-lg-12 col-md-12">
+                        <button
+                          (click)="edit(medicine)"
+                          type="button"
+                          class="btn fhc-button"
+                        >
+                          <i class="bi bi-pencil-square me-1"></i>
+                          Chỉnh sửa
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<app-footer></app-footer>
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <section *ngIf="popup == 'import'" class="section min-height-740">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Chỉnh sửa thông tin thuốc</h5>
+              <hr />
+              <form class="row g-3">
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input
+                      #medicineName
+                      type="text"
+                      class="form-control"
+                      placeholder="Tên thuốc"
+                      autocomplete="off"
+                      value=""
+                    />
+                    <label>Tên thuốc</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input
+                      #medicineProducer
+                      type="text"
+                      class="form-control"
+                      placeholder="Công dụng"
+                      autocomplete="off"
+                      value=""
+                    />
+                    <label>Nhà sản xuất</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating mb-3">
+                    <textarea
+                      #medicineIngredients
+                      type="text"
+                      class="form-control min-100h"
+                      placeholder="Thành phần"
+                      autocomplete="off"
+                      value=""
+                    ></textarea>
+                    <label>Thành phần</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <textarea
+                      #medicineUses
+                      type="text"
+                      class="form-control min-100h"
+                      placeholder="Công dụng"
+                      autocomplete="off"
+                      value=""
+                    ></textarea>
+                    <label>Công dụng</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input
+                      #medicineImg
+                      (change)="importFile2($event)"
+                      type="file"
+                      class="form-control"
+                      placeholder="Hình ảnh"
+                      autocomplete="off"
+                      value=""
+                    />
+                    <label>Thay đổi hình ảnh</label>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <input type="hidden" #medicineId />
+                  <button
+                    [disabled]="checkUpdate"
+                    (click)="updateMedicine()"
+                    type="button"
+                    class="btn fhc-button"
+                  >
+                    <i class="bi bi-pencil-square me-1"></i> Chỉnh sửa
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Nhập thông tin qua file CSV</h5>
+              <hr />
+              <input
+                hidden
+                (change)="uploadFile($event)"
+                type="file"
+                id="medicineFile"
+                accept="text/csv"
+              />
+              <button
+                (click)="importFile()"
+                type="button"
+                class="btn fhc-button ml-5"
+              >
+                <i class="bi bi-file-earmark-arrow-up"></i> Nhập file
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button (click)="close()" type="button" class="btn fhc-button ml-5">
+        <i class="bi bi-x-circle me-1"></i> Thoát
+      </button>
+    </section>
+    <section *ngIf="popup == 'report'" class="section min-height-740">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Báo cáo</h5>
+              <hr />
+              <form class="row g-3">
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input
+                      #reportMonth
+                      type="text"
+                      class="form-control"
+                      placeholder="Tháng báo cáo"
+                      autocomplete="off"
+                    />
+                    <label for="password">Tháng báo cáo</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input
+                      #reportYear
+                      type="text"
+                      class="form-control"
+                      placeholder="Năm báo cáo"
+                      autocomplete="off"
+                    />
+                    <label for="password">Năm báo cáo</label>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <button
+                    (click)="searchMedicineReport_Request(1)"
+                    type="button"
+                    class="btn fhc-button"
+                  >
+                    <i class="bi bi-search me-1"></i> Tìm kiếm
+                  </button>
+                </div>
+                <div *ngFor="let f of filename" class="row g-3 fhc-search-report">
+                  <div  class="col-md-4">
+                    <div class="form-floating dp-fl">
+                      <input
+                        #nameFile
+                        type="text"
+                        class="form-control"
+                        placeholder="Tên file"
+                        autocomplete="off"
+                        disabled
+                        value="{{splitNameFile(f.filename)}}"
+                      />
+                      <label for="password">Tên file</label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-floating dp-fl">
+                      <input
+                        #nameFile
+                        type="text"
+                        class="form-control"
+                        placeholder="Tên file"
+                        autocomplete="off"
+                        disabled
+                        value="{{ f.createUser }}"
+                      />
+                      <label>Người tạo</label>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <button
+                      (click)="downloadFile(f.filename)"
+                      type="button"
+                      class="btn fhc-button ml-5"
+                      title="Tải file xuống"
+                    >
+                      <i class="bi bi-download me-1"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Xuất báo cáo</h5>
+              <hr />
+              <form class="row g-3">
+                <div class="col-md-12">
+                  <div class="form-floating dp-fl">
+                    <select
+                      (change)="typeRpChange()"
+                      #reportType
+                      class="form-select"
+                      aria-label="Default select example"
+                    >
+                      <option
+                        selected
+                        value="quantity/amountOfMedicine/analysis"
+                      >
+                        Tất cả
+                      </option>
+                      <option value="quantity">Số lượng thuốc</option>
+                      <option value="amountOfMedicine">
+                        Số lượng đã tiêu thụ trong tháng
+                      </option>
+                      <option value="analysis">Phân tích</option>
+                    </select>
+                    <label for="password">Loại báo cáo</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input
+                      #exportMonth
+                      type="text"
+                      class="form-control"
+                      placeholder="Tháng báo cáo"
+                      autocomplete="off"
+                    />
+                    <label for="password">Tháng báo cáo</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input
+                      #exportYear
+                      type="text"
+                      class="form-control"
+                      placeholder="Năm báo cáo"
+                      autocomplete="off"
+                    />
+                    <label for="password">Năm báo cáo</label>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <button
+                    (click)="exportReport()"
+                    type="button"
+                    class="btn fhc-button"
+                  >
+                    <i class="bi bi-printer me-1"></i> Tạo báo cáo
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button (click)="close()" type="button" class="btn fhc-button ml-5">
+        <i class="bi bi-x-circle me-1"></i> Thoát
+      </button>
+    </section>
+    <section *ngIf="popup == 'confirmInport'" class="section min-height-740">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <hr>
+              <div class="alert alert-warning  alert-dismissible fade show" role="alert">
+                <h4 class="alert-heading">Xác nhận</h4>
+                <p>Các thông tin liên quan đến cập nhật số lượng thuốc rất quan trọng, hãy đảm bảo rằng bạn đã kiểm tra file đầu vào thật kỹ để tránh trường hợp sai sót trong quá trình nhập liệu.</p>
+                <hr>
+                <p class="mb-0">Nếu đã chắn chắn hãy nhấn tiếp tục để xử lý tiếp.</p>
+              </div>
+              <form class="row g-3">
+                <div class="col-lg-6">
+                  <input (change)="importQuantityFromFile($event)" id="importQuantity" type="file" hidden>
+                  <button
+                    (click)="confirmImport()"
+                    type="button"
+                    class="btn fhc-button"
+                  >
+                    <i class="bi bi-check-circle me-1"></i> Tiếp tục 
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button (click)="close_import()" type="button" class="btn fhc-button ml-5">
+        <i class="bi bi-x-circle me-1"></i> Thoát
+      </button>
+    </section>
+    <section *ngIf="popup == 'request'" class="section min-height-740">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Tìm thông tin lần nhập thuốc</h5>
+              <hr />
+              <form class="row g-3">
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input
+                      #reportMonth
+                      type="text"
+                      class="form-control"
+                      placeholder="Tháng yêu cầu"
+                      autocomplete="off"
+                    />
+                    <label for="password">Tháng yêu cầu</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input
+                      #reportYear
+                      type="text"
+                      class="form-control"
+                      placeholder="Năm yêu cầu"
+                      autocomplete="off"
+                    />
+                    <label for="password">Năm yêu cầu</label>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <button
+                    (click)="searchMedicineReport_Request(2)"
+                    type="button"
+                    class="btn fhc-button"
+                  >
+                    <i class="bi bi-search me-1"></i> Tìm kiếm
+                  </button>
+                </div>
+                <div *ngFor="let f of filenameRequest" class="row g-3 fhc-search-report">
+                  <div  class="col-md-4">
+                    <div class="form-floating dp-fl">
+                      <input
+                        #nameFile
+                        type="text"
+                        class="form-control"
+                        placeholder="Tên file"
+                        autocomplete="off"
+                        disabled
+                        value="{{splitNameFile(f.filename)}}"
+                      />
+                      <label for="password">Tên file</label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-floating dp-fl">
+                      <input
+                        #nameFile
+                        type="text"
+                        class="form-control"
+                        placeholder="Tên file"
+                        autocomplete="off"
+                        disabled
+                        value="{{ f.createUser }}"
+                      />
+                      <label>Người tạo</label>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <button
+                      (click)="downloadFile(f.filename)"
+                      type="button"
+                      class="btn fhc-button ml-5"
+                      title="Tải file xuống"
+                    >
+                      <i class="bi bi-download me-1"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Tạo yêu cầu nhập thuốc</h5>
+              <hr />
+              <form class="row g-3">
+                <div class="col-lg-6">
+                  <button
+                    (click)="drugImportRequest()"
+                    type="button"
+                    class="btn fhc-button"
+                  >
+                    <i class="bi bi-printer me-1"></i> Tạo yêu cầu nhập thuốc
+                  </button>
+                </div>
+                <div class="col-lg-6">
+                  <button
+                    (click)="openPopConfirm()"
+                    type="button"
+                    class="btn fhc-button"
+                  >
+                    <i class="bi bi-check-circle me-1"></i> Nhập thuốc vào kho
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button (click)="close()" type="button" class="btn fhc-button ml-5">
+        <i class="bi bi-x-circle me-1"></i> Thoát
+      </button>
+    </section>
+  </div>
+</div>

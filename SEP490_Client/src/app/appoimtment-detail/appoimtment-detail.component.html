@@ -1,0 +1,147 @@
+<app-header></app-header>
+<app-left-menu></app-left-menu>
+<main id="main" class="main">
+  <section class="section min-height-740">
+    <div *ngIf="isAuthor" class="row">
+      <div class="col-lg-8">
+        <div class="card">
+          <div class="card-body min-height-550">
+            <h1 class="card-title-2 text-center">Thông tin lịch khám</h1>
+            <hr />
+            <div class="d-flex justify-content-center py-4">
+              <a href="#" class="logo d-flex align-items-center w-auto">
+                <img src="assets/img/logo.png" alt="" />
+                <span class="d-none d-lg-block">FPT Hospital Care</span>
+              </a>
+            </div>
+            <div class="row tab-content pt-2">
+              <div class="col-lg-6 tab-pane fade show active profile-overview">
+                <div class="row label-2">
+                  <div class="col-lg-3 col-md-4 label">Bệnh nhân:</div>
+                  <div class="col-lg-9 col-md-8">
+                    {{ paramShareAP.fullname }}
+                  </div>
+                </div>
+                <div class="row label-2">
+                  <div class="col-lg-3 col-md-4 label">Địa chỉ:</div>
+                  <div class="col-lg-9 col-md-8">
+                    {{ paramShareAP.address }}
+                  </div>
+                </div>
+                <div class="row label-2">
+                  <div class="col-lg-3 col-md-4 label">Điện thoại:</div>
+                  <div class="col-lg-9 col-md-8">{{ paramShareAP.phone }}</div>
+                </div>
+                <div class="row label-2">
+                  <div class="col-lg-3 col-md-4 label">Người thân:</div>
+                  <div class="col-lg-9 col-md-8">
+                    {{ paramShareAP.fullnameNT }}
+                  </div>
+                </div>
+                <div class="row label-2">
+                  <div class="col-lg-3 col-md-4 label">Đ.thoại (NN):</div>
+                  <div class="col-lg-9 col-md-8">
+                    {{ paramShareAP.addressNT }}
+                  </div>
+                </div>
+                <div class="row label-2">
+                  <div class="col-lg-3 col-md-4 label">Địa chỉ (NN):</div>
+                  <div class="col-lg-9 col-md-8">
+                    {{ paramShareAP.phoneNT }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="row label-2">
+                  <div class="col-lg-3 col-md-4 label">Khám bệnh:</div>
+                  <div class="col-lg-9 col-md-8">
+                    {{ paramShareAP.facultyName }}
+                  </div>
+                </div>
+                <div class="row label-2">
+                  <div class="col-lg-3 col-md-4 label">Ngày khám:</div>
+                  <div class="col-lg-9 col-md-8">
+                    {{ paramShareAP.examinationDate }}
+                  </div>
+                </div>
+                <div class="row label-2">
+                  <div class="col-lg-3 col-md-4 label">Giờ khám:</div>
+                  <div class="col-lg-9 col-md-8">
+                    {{ paramShareAP.examinationTime }}
+                  </div>
+                </div>
+                <div class="row label-2">
+                  <div class="col-lg-3 col-md-4 label">Bác sĩ:</div>
+                  <div class="col-lg-9 col-md-8">
+                    {{ paramShareAP.doctorName }}
+                  </div>
+                </div>
+                <div class="row label-2">
+                  <div class="col-lg-3 col-md-4 label">Triệu chứng:</div>
+                  <div class="col-lg-9 col-md-8">
+                    {{ paramShareAP.symptom }}
+                  </div>
+                </div>
+                <div class="row label-2">
+                  <div class="col-lg-3 col-md-4 label">Trạng thái:</div>
+                  <div class="col-lg-9 col-md-8">
+                    <span class="badge bg-success">
+                      <i class="bi bi-check-circle me-1"></i>
+                      <strong>{{ paramShareAP.status }}</strong>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="row label-2">
+                <div class="col-lg-3 col-md-4 label">Khám tại:</div>
+                <div class="col-lg-9 col-md-8">
+                  <strong>{{ paramShareAP.place }}</strong>
+                </div>
+              </div>
+              <div class="col-12">
+                <p class="small mb-0">(*) NN: Người nhà</p>
+              </div>
+            </div>
+            <hr />
+            <div class="col-12 text-center">
+              <p class="small mb-0">
+                Nếu có thông tin sai sót vui lòng liên hệ hotline: 0386993897 để
+                được hỗ trợ.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-body min-height-550">
+            <h1 class="card-title-2 text-center">Mã QR Code</h1>
+            <hr />
+            <input id="nameFileQR" #nameFileQR hidden type="text" value="" />
+            <input id="qrCode" #qrCode hidden type="text" value="" />
+            <div class="row mb-3 text-center">
+              <div id="qrcode" class="col-sm-12 text-center"></div>
+            </div>
+            <hr />
+            <div class="col-12 text-center">
+              <button
+                (click)="goToDiagnosticCard(URL)"
+                type="button"
+                class="btn fhc-button"
+              >
+                <i class="bi bi-door-open me-1"></i> Xem phiếu chuẩn đoán
+              </button>
+            </div>
+            <hr />
+            <div class="col-12 text-center">
+              <button onclick="downloadQR()" type="button" class="btn fhc-button">
+                <i class="bi bi-download me-1"></i> Tải xuống
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<app-footer></app-footer>

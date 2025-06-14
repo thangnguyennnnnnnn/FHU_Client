@@ -1,0 +1,606 @@
+<app-header></app-header>
+<app-left-menu></app-left-menu>
+<main id="main" class="main">
+    <section class="section profile">
+        <div class="row">
+            <div class="col-xl-4">
+                <div class="card fhc-card">
+                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                        <img #imgAvatarD src="{{profile.urlAvt}}" alt="Profile" class="fhc-img-2">
+                        <h2>{{profile.firstName}} {{profile.middleName}} {{profile.lastName}}</h2>
+                        <h3>{{profile.roleName}}</h3>
+                        <div class="social-links mt-2">
+                            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="isStaffUpdated" class="col-xl-8">
+                <div class="card fhc-card">
+                    <div class="card-body pt-3">
+                        <!-- Bordered Tabs -->
+                        <ul class="nav nav-tabs d-flex">
+                            <li class="nav-item flex-fill">
+                                <button class="nav-link w-100 active" data-bs-toggle="tab"
+                                    data-bs-target="#profile-overview">Chung</button>
+                            </li>
+                            <li class="nav-item flex-fill">
+                                <button class="nav-link w-100" data-bs-toggle="tab" data-bs-target="#profile-edit">Chỉnh
+                                    sửa</button>
+                            </li>
+                            <li class="nav-item flex-fill">
+                                <button class="nav-link w-100" data-bs-toggle="tab"
+                                    data-bs-target="#profile-change-password">Thay đổi mật khẩu</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content pt-2">
+                            <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                                <div *ngIf="profile.positionId != null" class="row">
+                                    <div class="col-lg-3 col-md-4 col-6">
+                                        <h5 class="card-title">Chuyên khoa</h5>
+                                        <div class="small fst-italic">{{profile.facultyName}}</div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4 col-6">
+                                        <h5 class="card-title">Chức vụ</h5>
+                                        <div class="small fst-italic">{{profile.positionName}}</div>
+                                    </div>
+                                </div>
+                                <hr *ngIf="profile.positionId != null">
+                                <h5 class="card-title">Thông tin</h5>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4 label ">Họ và tên</div>
+                                            <div class="col-lg-8 col-md-8">{{profile.firstName}} {{profile.middleName}} {{profile.lastName}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4 label">Ngày sinh</div>
+                                            <div class="col-lg-8 col-md-8">{{profile.birthday}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4 label">Giới tính</div>
+                                            <div class="col-lg-8 col-md-8">{{profile.gender}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4 label">Quốc tịch</div>
+                                            <div class="col-lg-8 col-md-8">{{profile.nationality}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4 label">Địa chỉ</div>
+                                            <div class="col-lg-8 col-md-8">{{profile.address}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4 label">Số điện thoại</div>
+                                            <div class="col-lg-8 col-md-8">{{profile.phoneNumber}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4 label">Email</div>
+                                            <div class="col-lg-8 col-md-8">{{profile.email}}</div>
+                                        </div>
+                                    </div>                                
+                                </div>
+                            </div>
+                            <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+                                <!-- Profile Edit Form -->
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="row mb-3">
+                                                <label for="profileImage" class="col-md-12 col-lg-12 col-form-label">Ảnh đại
+                                                    diện</label>
+                                                <div class="col-md-12 col-lg-12 d-flex flex-column align-items-center">
+                                                    <img (click)="openUploadFile()" class="fhc-img fhc-upload" #imgAvatar src="{{profile.urlAvt}}" alt="Profile">
+                                                    <i class="bi bi-camera fhc-upload-icon" (click)="openUploadFile()"aria-hidden="true"></i>
+                                                    <div class="pt-2">
+                                                        <input type="file" accept="image/*" (change)="showNewAvt($event)" #avatar style="display: none;" />
+                                                        <button (click)="uploadAvata()" class="btn fhc-button btn-sm" [disabled]="isBtnuploadDisable"
+                                                            title="Tải ảnh lên"><i class="bi bi-upload"></i></button>
+                                                        <button class="btn fhc-button btn-sm"
+                                                            title="Remove my profile image"><i class="bi bi-trash"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <input
+                                                          #firstName
+                                                          type="text"
+                                                          class="form-control"
+                                                          id="firstName"
+                                                          placeholder="Tên"
+                                                          autocomplete="off"
+                                                          value="{{profile.firstName}}"
+                                                        />
+                                                        <label class="col-form-label" for="firstName">Tên</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <input
+                                                          #middleName
+                                                          type="text"
+                                                          class="form-control"
+                                                          id="middleName"
+                                                          placeholder="Tên"
+                                                          autocomplete="off"
+                                                          value="{{profile.middleName}}"
+                                                        />
+                                                        <label class="col-form-label" for="middleName">Tên đệm</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <input
+                                                          #lastName
+                                                          type="text"
+                                                          class="form-control"
+                                                          id="lastName"
+                                                          placeholder="Họ"
+                                                          autocomplete="off"
+                                                          value="{{profile.lastName}}"
+                                                        />
+                                                        <label class="col-form-label" for="lastName">Họ</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <input
+                                                          #birthDate
+                                                          type="date"
+                                                          class="form-control"
+                                                          id="birthDate"
+                                                          placeholder="Ngày sinh"
+                                                          autocomplete="off"
+                                                          value="{{profile.birthday}}"
+                                                        />
+                                                        <label class="col-form-label" for="birthDate">Ngày sinh</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <select
+                                                          class="form-select"
+                                                          id="gender"
+                                                          aria-label="Phường - Xã"
+                                                          #gender
+                                                          value="{{profile.gender}}"
+                                                        >
+                                                            <option value="">Chưa chọn</option>
+                                                          <option value="Nam">Nam</option>
+                                                          <option value="Nữ">Nữ</option>
+                                                          <option value="Khác">Khác</option>
+                                                        </select>
+                                                        <label class="col-form-label" for="gender">Giới tính</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <input
+                                                          #nationality
+                                                          type="text"
+                                                          class="form-control"
+                                                          id="nationality"
+                                                          placeholder="Quốc tịch"
+                                                          autocomplete="off"
+                                                          value="{{profile.nationality}}"
+                                                        />
+                                                        <label class="col-form-label" for="nationality">Quốc tịch</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <input
+                                                          #address
+                                                          type="text"
+                                                          class="form-control"
+                                                          id="address"
+                                                          placeholder="Địa chỉ"
+                                                          autocomplete="off"
+                                                          value="{{profile.address}}"
+                                                        />
+                                                        <label class="col-form-label" for="address">Địa chỉ</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <input
+                                                          #phone
+                                                          type="text"
+                                                          class="form-control"
+                                                          id="phone"
+                                                          placeholder="Số điện thoại"
+                                                          autocomplete="off"
+                                                          value="{{profile.phoneNumber}}"
+                                                        />
+                                                        <label class="col-form-label" for="phone">Số điện thoại</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <input
+                                                          #email
+                                                          type="email"
+                                                          class="form-control"
+                                                          id="email"
+                                                          placeholder="Email"
+                                                          autocomplete="off"
+                                                          value="{{profile.email}}"
+                                                        />
+                                                        <label class="col-form-label" for="email">Email</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="row mb-3">
+                                        <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter
+                                            Profile</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="twitter" type="text" class="form-control" id="Twitter"
+                                                value="https://twitter.com/#">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook
+                                            Profile</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="facebook" type="text" class="form-control" id="Facebook"
+                                                value="https://facebook.com/#">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram
+                                            Profile</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="instagram" type="text" class="form-control" id="Instagram"
+                                                value="https://instagram.com/#">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin
+                                            Profile</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="linkedin" type="text" class="form-control" id="Linkedin"
+                                                value="https://linkedin.com/#">
+                                        </div>
+                                    </div> -->
+                                    <div class="text-center pt-3">
+                                        <button (click)="updadeProfile()" type="submit" class="btn fhc-button">Xác nhận</button>
+                                    </div>
+                                </form><!-- End Profile Edit Form -->
+                            </div>
+                            <div class="tab-pane fade pt-3" id="profile-change-password">
+                                <!-- Change Password Form -->
+                                <form>
+                                    <div class="row mb-3">
+                                        <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Mật khẩu
+                                            hiện tại</label>
+                                        <div class="my-input-group col-md-8 col-lg-9" id="currentPassword">
+                                            <input #oldPassword type="password" class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <a href="#" onmousedown="showPassword('#currentPassword')"
+                                                        onmouseup="showPassword('#currentPassword')"><i
+                                                            class="bi bi-eye-slash-fill"></i></a></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Mật khẩu
+                                            mới</label>
+                                        <div class="my-input-group col-md-8 col-lg-9" id="newPassword">
+                                            <input #newPassword type="password" class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <a href="#" onmousedown="showPassword('#newPassword')"
+                                                        onmouseup="showPassword('#newPassword')"><i
+                                                            class="bi bi-eye-slash-fill"></i></a></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Xác
+                                            nhận</label>
+                                        <div class="my-input-group col-md-8 col-lg-9" id="renewPassword">
+                                            <input (blur)="confirmPassword()" #newPasswordConfirm type="password" class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <a href="#" onmousedown="showPassword('#renewPassword')"
+                                                        onmouseup="showPassword('#renewPassword')"><i
+                                                            class="bi bi-eye-slash-fill"></i></a></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <button (click)="changePassword()" type="submit" class="btn fhc-button">Thay đổi</button>
+                                    </div>
+                                </form><!-- End Change Password Form -->
+                            </div>
+                        </div><!-- End Bordered Tabs -->
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!isStaffUpdated" class="col-xl-8">
+                <div class="card">
+                    <div class="card-body pt-3">
+                        <div class="alert alert-info  alert-dismissible fade show" role="alert">
+                            <h4 class="alert-heading">FHC xin chào mừng {{profile.lastName}}</h4>
+                            <p>Chào mừng bạn đến với FPT Hospital Care. Chỉ còn vài bước nữa thôi bạn sẽ trở thành một thành viên của FHC. Hãy thực hiện nó.</p>
+                            <hr>
+                            <p class="mb-0">Hãy cập nhật các thông tin cần thiết.</p>
+                          </div>
+                        <!-- Bordered Tabs -->
+                        <ul class="nav nav-tabs d-flex">
+                            <li class="nav-item flex-fill">
+                                <button class="nav-link w-100 active" data-bs-toggle="tab"
+                                    data-bs-target="#profile-change-password">Bước 1 - Cập nhật mật khẩu mới</button>
+                            </li>
+                            <li class="nav-item flex-fill">
+                                <button class="nav-link w-100" data-bs-toggle="tab" data-bs-target="#profile-edit">Bước 2 - Cập nhật thông tin cá nhân</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content pt-2">
+                            <div class="tab-pane fade show active pt-3" id="profile-change-password">
+                                <!-- Change Password Form -->
+                                <form>
+                                    <div class="row mb-3">
+                                        <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Mật khẩu
+                                            hiện tại</label>
+                                        <div class="my-input-group col-md-8 col-lg-9" id="currentPassword">
+                                            <input #oldPassword type="password" class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <a href="#" onmousedown="showPassword('#currentPassword')"
+                                                        onmouseup="showPassword('#currentPassword')"><i
+                                                            class="bi bi-eye-slash-fill"></i></a></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Mật khẩu
+                                            mới</label>
+                                        <div class="my-input-group col-md-8 col-lg-9" id="newPassword">
+                                            <input #newPassword type="password" class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <a href="#" onmousedown="showPassword('#newPassword')"
+                                                        onmouseup="showPassword('#newPassword')"><i
+                                                            class="bi bi-eye-slash-fill"></i></a></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Xác
+                                            nhận</label>
+                                        <div class="my-input-group col-md-8 col-lg-9" id="renewPassword">
+                                            <input (blur)="confirmPassword()" #newPasswordConfirm type="password" class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <a href="#" onmousedown="showPassword('#renewPassword')"
+                                                        onmouseup="showPassword('#renewPassword')"><i
+                                                            class="bi bi-eye-slash-fill"></i></a></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <button (click)="changePassword()" type="submit" class="btn fhc-button">Thay đổi</button>
+                                    </div>
+                                </form><!-- End Change Password Form -->
+                            </div>
+                            <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+                                <!-- Profile Edit Form -->
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="row mb-3">
+                                                <label for="profileImage" class="col-md-12 col-lg-12 col-form-label">Ảnh đại
+                                                    diện</label>
+                                                <div class="col-md-12 col-lg-12 d-flex flex-column align-items-center">
+                                                    <img (click)="openUploadFile()" class="fhc-img fhc-upload" #imgAvatar src="{{profile.urlAvt}}" alt="Profile">
+                                                    <div class="pt-2">
+                                                        <input type="file" accept="image/*" (change)="showNewAvt($event)" #avatar style="display: none;" />
+                                                        <button (click)="uploadAvata()" class="fhc-button btn-sm" [disabled]="isBtnuploadDisable"
+                                                            title="Upload new profile image"><i class="bi bi-upload"></i></button>
+                                                        <button class="fhc-button btn-sm"
+                                                            title="Remove my profile image"><i class="bi bi-trash"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <input
+                                                          #firstName
+                                                          type="text"
+                                                          class="form-control"
+                                                          id="firstName"
+                                                          placeholder="Tên"
+                                                          autocomplete="off"
+                                                          value="{{profile.firstName}}"
+                                                        />
+                                                        <label class="col-form-label" for="firstName">Tên</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <input
+                                                          #middleName
+                                                          type="text"
+                                                          class="form-control"
+                                                          id="middleName"
+                                                          placeholder="Tên"
+                                                          autocomplete="off"
+                                                          value="{{profile.middleName}}"
+                                                        />
+                                                        <label class="col-form-label" for="middleName">Tên đệm</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <input
+                                                          #lastName
+                                                          type="text"
+                                                          class="form-control"
+                                                          id="lastName"
+                                                          placeholder="Họ"
+                                                          autocomplete="off"
+                                                          value="{{profile.lastName}}"
+                                                        />
+                                                        <label class="col-form-label" for="lastName">Họ</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <input
+                                                          #birthDate
+                                                          type="date"
+                                                          class="form-control"
+                                                          id="birthDate"
+                                                          placeholder="Ngày sinh"
+                                                          autocomplete="off"
+                                                          value="{{profile.birthday}}"
+                                                        />
+                                                        <label class="col-form-label" for="birthDate">Ngày sinh</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <select
+                                                          class="form-select"
+                                                          id="gender"
+                                                          aria-label="Phường - Xã"
+                                                          #gender
+                                                          value="{{profile.gender}}"
+                                                        >
+                                                            <option value="">Chưa chọn</option>
+                                                          <option value="Nam">Nam</option>
+                                                          <option value="Nữ">Nữ</option>
+                                                          <option value="Khác">Khác</option>
+                                                        </select>
+                                                        <label class="col-form-label" for="gender">Giới tính</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <input
+                                                          #nationality
+                                                          type="text"
+                                                          class="form-control"
+                                                          id="nationality"
+                                                          placeholder="Quốc tịch"
+                                                          autocomplete="off"
+                                                          value="{{profile.nationality}}"
+                                                        />
+                                                        <label class="col-form-label" for="nationality">Quốc tịch</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <input
+                                                          #address
+                                                          type="text"
+                                                          class="form-control"
+                                                          id="address"
+                                                          placeholder="Địa chỉ"
+                                                          autocomplete="off"
+                                                          value="{{profile.address}}"
+                                                        />
+                                                        <label class="col-form-label" for="address">Địa chỉ</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <input
+                                                          #phone
+                                                          type="text"
+                                                          class="form-control"
+                                                          id="phone"
+                                                          placeholder="Số điện thoại"
+                                                          autocomplete="off"
+                                                          value="{{profile.phoneNumber}}"
+                                                        />
+                                                        <label class="col-form-label" for="phone">Số điện thoại</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <input
+                                                          #email
+                                                          type="email"
+                                                          class="form-control"
+                                                          id="email"
+                                                          placeholder="Email"
+                                                          autocomplete="off"
+                                                          value="{{profile.email}}"
+                                                        />
+                                                        <label class="col-form-label" for="email">Email</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="row mb-3">
+                                        <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter
+                                            Profile</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="twitter" type="text" class="form-control" id="Twitter"
+                                                value="https://twitter.com/#">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook
+                                            Profile</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="facebook" type="text" class="form-control" id="Facebook"
+                                                value="https://facebook.com/#">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram
+                                            Profile</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="instagram" type="text" class="form-control" id="Instagram"
+                                                value="https://instagram.com/#">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin
+                                            Profile</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="linkedin" type="text" class="form-control" id="Linkedin"
+                                                value="https://linkedin.com/#">
+                                        </div>
+                                    </div> -->
+                                    <div class="text-center pt-3">
+                                        <button (click)="updadeProfile()" type="submit" class="btn fhc-button">Xác nhận</button>
+                                    </div>
+                                </form><!-- End Profile Edit Form -->
+                            </div>
+                        </div><!-- End Bordered Tabs -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<app-footer></app-footer>
