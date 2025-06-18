@@ -17,19 +17,25 @@
                     <h5 class="card-title text-center pb-0 fs-4">Đăng nhập</h5>
                   </div>
                   <div #notiContent></div>
-                  <form [formGroup]="loginForm" class="row g-3 needs-validation" novalidate>
+                  <form [formGroup]="loginForm" (ngSubmit)="signinSystem()" class="row g-3 needs-validation" novalidate>
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Tài khoản</label>
                       <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input formControlName="username" type="text" name="username" class="form-control" id="yourUsername" required>
-                        <div class="invalid-feedback">Vui lòng nhập tài khoản.</div>
+                        <input formControlName="username" type="text" name="username" class="form-control" id="yourUsername"
+                          [class.is-invalid]="loginForm.get('username')?.invalid">
+                        <div *ngIf="loginForm.get('username')?.invalid" class="invalid-feedback">
+                          Tài khoản là bắt buộc.
+                        </div>
                       </div>
                     </div>
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Mật khẩu</label>
-                      <input formControlName="password" type="password" name="password" class="form-control" id="yourPassword" required>
-                      <div class="invalid-feedback">Vui Lòng nhập mật khẩu!</div>
+                      <input formControlName="password" type="password" name="password" class="form-control" id="yourPassword" 
+                        [class.is-invalid]="isSubmitted && loginForm.get('password')?.invalid">
+                      <div *ngIf="isSubmitted && loginForm.get('password')?.invalid" class="invalid-feedback">
+                        Mật khẩu là bắt buộc.
+                      </div>
                     </div>
                     <div class="col-12">
                       <div class="form-check">
@@ -38,7 +44,7 @@
                       </div>
                     </div>
                     <div class="col-12">
-                      <button (click)="signinSystem()" class="btn fhc-button" type="submit">Đăng nhập</button>
+                      <button class="btn fhc-button" type="submit">Đăng nhập</button>
                     </div>
                     <div class="col-12">
                       <p class="small mb-0">Không có tài khoản? <a (click)="gotoSignup()" href="#">Tạo tài khoản</a></p>

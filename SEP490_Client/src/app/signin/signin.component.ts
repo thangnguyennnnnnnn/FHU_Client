@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms'
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { HttpClient,} from '@angular/common/http';
 import { UserLogin } from '../model/userLogin';
 import { ReciveModel } from '../model/reciveModel';
@@ -24,11 +24,11 @@ export class SigninComponent implements OnInit, AfterViewInit {
 
   constructor(private route: ActivatedRoute, private fb: FormBuilder, private httpClient: HttpClient, private router: Router, private validateService: ValidateService) {}
 
-  private socketService =  new SocketService();
   private commonService = new CommonService();
   private loadingService = new LoadingService();
   private constantVariable = new ConstantVariable();
 
+  isSubmitted = false;
   isLogin = false;
   isNotFound = false;
   ErrorMessage = '';
@@ -38,11 +38,10 @@ export class SigninComponent implements OnInit, AfterViewInit {
     this.commonService.setLocalSotrage('page', 'dang-nhap');
     console.log('Main run...');
     this.loginForm = this.fb.group({
-      username: '',
-      password: '',
+      username: ['', Validators.required],
+      password: ['', Validators.required],
       errorLabel: ''
     });
-    await this.loadingService.Start();
     this.url = this.router.routerState.snapshot.url;
     var loginState = localStorage.getItem('loginState');
     
@@ -79,6 +78,11 @@ export class SigninComponent implements OnInit, AfterViewInit {
   }
 
   async signinSystem(): Promise<void> {
+    
+    this.isSubmitted = true;
+    if (this.loginForm.invalid) {
+      return;
+    }
     this.loadingService.Start();
     var contentNoti = (this.notiContent.nativeElement as HTMLInputElement);
     
