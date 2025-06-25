@@ -1,6 +1,7 @@
 import { ElementRef } from "@angular/core";
 import { SocketService } from '../service/SocketService'
 import { ConstantVariable } from "./ConstantVariable";
+import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 export class ValidateService {
 
   constantVariable = new ConstantVariable();
@@ -170,4 +171,26 @@ export class ValidateService {
     }, 4000);
   }
 
+}
+
+export function phoneNumberValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+    const value = control.value;
+    const phoneRegex = /^(0|\+84)[0-9]{9}$/;
+
+    if (!value) return null;
+
+    return phoneRegex.test(value) ? null : { invalidPhone: true };
+  };
+}
+
+export function isEmailValid(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+    const value = control.value;
+    const emailRegex: RegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if (!value) return null;
+
+    return emailRegex.test(value) ? null : { invalidEmail: true };
+  };
 }

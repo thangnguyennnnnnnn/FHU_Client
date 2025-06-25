@@ -1,0 +1,38 @@
+<div [formGroup]="form" class="mb-2" [ngStyle]="{ width: width }">
+  <label *ngIf="label" [for]="controlId" class="form-label">{{ label }}</label>
+
+  <!-- Input thường: text, password, email, number... -->
+  <input
+    *ngIf="type !== 'textarea' && type !== 'select'"
+    [type]="type"
+    [formControlName]="controlName"
+    [id]="controlId"
+    class="form-control"
+    [class.is-invalid]="isInvalid()"
+  />
+
+  <!-- Textarea -->
+  <textarea
+    *ngIf="type === 'textarea'"
+    [formControlName]="controlName"
+    [id]="controlId"
+    class="form-control"
+    [class.is-invalid]="isInvalid()"
+  ></textarea>
+
+  <!-- Select box -->
+  <select
+    *ngIf="type === 'select'"
+    [formControlName]="controlName"
+    [id]="controlId"
+    class="form-control"
+    [class.is-invalid]="isInvalid()">
+    <option value="">-- Chọn --</option>
+    <option *ngFor="let opt of options" [value]="opt.value">{{ opt.label }}</option>
+  </select>
+
+  <!-- Error message -->
+  <div *ngIf="isInvalid()" class="invalid-feedback">
+    {{ getErrorMessage() }}
+  </div>
+</div>

@@ -42,7 +42,7 @@ import { ViewFeedbackComponent } from './view-feedback/view-feedback.component';
 import { ManagementWorkingTimeComponent } from './management-working-time/management-working-time.component';
 import { MessageComponent } from './message/message.component';
 import { ConfirmAccountComponent } from './confirm-account/confirm-account.component';
-import { CommonComponentComponent } from './common/component/common-component/common-component.component';
+import { InputComponentComponent } from './common/component/common-component/input-component.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +83,7 @@ import { CommonComponentComponent } from './common/component/common-component/co
     ManagementWorkingTimeComponent,
     MessageComponent,
     ConfirmAccountComponent,
-    CommonComponentComponent
+    InputComponentComponent
   ],
   imports: [
     BrowserModule,

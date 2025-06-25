@@ -22,42 +22,42 @@
                   <form [formGroup]="signupForm" (ngSubmit)="register()" class="row g-3 needs-validation" novalidate>
                     <div class="col-12">
                       <label for="yourName" class="form-label">Họ và tên</label>
-                      <app-common-component
+                      <app-input-component
                         [type]="'text'"
                         [form]="signupForm"
                         [controlName]="'yourName'"
                         [id]="'yourName'"
-                      ></app-common-component>
+                      ></app-input-component>
                     </div>
 
                     <div class="col-12">
                       <label for="yourEmail" class="form-label">Email</label>
-                      <app-common-component
+                      <app-input-component
                         [type]="'text'"
                         [form]="signupForm"
                         [controlName]="'yourEmail'"
                         [id]="'yourEmail'"
-                      ></app-common-component>
+                      ></app-input-component>
                     </div>
 
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Tài khoản</label>
-                      <app-common-component
+                      <app-input-component
                         [type]="'text'"
                         [form]="signupForm"
                         [controlName]="'yourUsername'"
                         [id]="'yourUsername'"
-                      ></app-common-component>
+                      ></app-input-component>
                     </div>
 
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Mật khẩu</label>
-                      <app-common-component
-                        [type]="'text'"
+                      <app-input-component
+                        [type]="'password'"
                         [form]="signupForm"
                         [controlName]="'yourPassword'"
                         [id]="'yourPassword'"
-                      ></app-common-component>
+                      ></app-input-component>
                     </div>
 
                     <div class="col-12">

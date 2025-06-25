@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { SendModel } from '../model/sendModel';
 import { ReciveModel } from '../model/reciveModel';
 import { DateTimeService } from '../service/DateTimeService';
-import { ValidateService } from '../service/ValidateService';
+import { isEmailValid, ValidateService } from '../service/ValidateService';
 import { UserInformationModel } from '../model/userInformationModel';
 @Component({
   selector: 'app-signup',
@@ -41,7 +41,7 @@ export class SignupComponent implements OnInit {
     this.loadingService.Start(); 
     this.signupForm = this.fb.group({
       yourName: ['', Validators.required],
-      yourEmail: ['', Validators.required],
+      yourEmail: ['', [Validators.required, isEmailValid()]],
       yourUsername: ['', Validators.required],
       yourPassword: ['', Validators.required],
       errorLabel: ''

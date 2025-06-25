@@ -20,21 +20,21 @@
                   <form [formGroup]="loginForm" (ngSubmit)="signinSystem()" class="row g-3 needs-validation" novalidate>
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Tài khoản</label>
-                      <app-common-component
+                      <app-input-component
                         [type]="'text'"
                         [form]="loginForm"
                         [controlName]="'username'"
                         [id]="'yourUsername'"
-                      ></app-common-component>
+                      ></app-input-component>
                     </div>
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Mật khẩu</label>
-                      <app-common-component
-                          [type]="'text'"
+                      <app-input-component
+                          [type]="'password'"
                           [form]="loginForm"
                           [controlName]="'password'"
                           [id]="'password'"
-                        ></app-common-component>
+                        ></app-input-component>
                     </div>
                     <div class="col-12">
                       <div class="form-check">

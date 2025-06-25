@@ -2,13 +2,13 @@ import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-common-component',
-  templateUrl: './common-component.component.html',
-  styleUrls: ['./common-component.component.css']
+  selector: 'app-input-component',
+  templateUrl: './input-component.component.html',
+  styleUrls: ['./input-component.component.css']
 })
-export class CommonComponentComponent {
+export class InputComponentComponent {
   @Input() label!: string;
-  @Input() type: 'text' | 'select' | 'textarea' = 'text';
+  @Input() type: 'text' | 'select' | 'password' | 'textarea' = 'text';
   @Input() form!: FormGroup;
   @Input() controlName!: string;
   @Input() options?: { value: string; label: string }[];
@@ -17,7 +17,7 @@ export class CommonComponentComponent {
 
   isInvalid() {
     const control = this.form.get(this.controlName);
-    return control?.invalid;
+    return !!control && control.invalid && (control.touched || control.dirty);
   }
 
   getErrorMessage() {
@@ -28,6 +28,8 @@ export class CommonComponentComponent {
       return 'Quá ngắn';
     if (control?.errors?.['formatError']) 
       return 'Không đúng định dạng';
+    if (control?.errors?.['invalidEmail']) 
+      return 'Email Không đúng định dạng';
     // ... có thể map thêm từ service hoặc enum
     return 'Không hợp lệ';
   }
