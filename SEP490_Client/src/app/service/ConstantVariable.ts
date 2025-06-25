@@ -24,11 +24,15 @@ export class ConstantVariable {
 
     public readonly NO_CHANGE_ERROR = 2100;
 
-    public readonly CONTENT_API_SERVER = 'https://fhc-server-394702.ue.r.appspot.com/';
+    //public readonly CONTENT_API_SERVER = 'https://fhc-server-394702.ue.r.appspot.com/';
+
+    public readonly CONTENT_API_SERVER = 'http://localhost:8080/';
 
     // public readonly CONTENT_API_SERVER = 'https://fhc-server-394702.ue.r.appspot.com/';
 
-    public readonly CONTENT_API_CLIENT = 'https://fhc-client.web.app/'; 
+    //public readonly CONTENT_API_CLIENT = 'https://fhc-client.web.app/'; 
+
+    public readonly CONTENT_API_CLIENT = 'https://localhost:4200/'; 
 
     public readonly CONTENT_API_REALTIME = 'wss://http://localhost:3000?room='
 

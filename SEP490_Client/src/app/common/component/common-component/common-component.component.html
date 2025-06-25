@@ -1,0 +1,15 @@
+<div [formGroup]="form">
+    <ng-container [ngSwitch]="type">
+        <input *ngSwitchCase="'text'" 
+        [formControlName]="controlName" 
+        type="text" 
+        [name]="controlName" 
+        class="form-control" 
+        [id]="controlId"
+        [class.is-invalid]="isInvalid()">
+    </ng-container>
+
+    <div *ngIf="isInvalid()" class="invalid-feedback">
+        {{ getErrorMessage() }}
+    </div>
+</div>

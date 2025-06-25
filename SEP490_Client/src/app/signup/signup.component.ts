@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { LoadingService } from '../service/LoadingService';
 import { ConstantVariable } from '../service/ConstantVariable';
 import { CommonService } from '../service/CommonService';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms'
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { HttpClient } from '@angular/common/http';
 import { SendModel } from '../model/sendModel';
 import { ReciveModel } from '../model/reciveModel';
@@ -16,15 +16,14 @@ import { UserInformationModel } from '../model/userInformationModel';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  @ViewChild('yourName') yourName!: ElementRef;
-  @ViewChild('yourEmail') yourEmail!: ElementRef;
-  @ViewChild('yourUsername') yourUsername!: ElementRef;
-  @ViewChild('yourPassword') yourPassword!: ElementRef;
-
+  
   @ViewChild('notiContent') notiContent!: ElementRef;
+
+  signupForm!: FormGroup;
 
   constructor(private fb: FormBuilder, private httpClient: HttpClient, private router: Router, private validateService: ValidateService) {}
   
+  isSubmitted = false;
   private loadingService = new LoadingService();
   private constantVariable = new ConstantVariable();
   private commonService = new CommonService();
@@ -40,6 +39,13 @@ export class SignupComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.commonService.setLocalSotrage('page', 'dang-ky');
     this.loadingService.Start(); 
+    this.signupForm = this.fb.group({
+      yourName: ['', Validators.required],
+      yourEmail: ['', Validators.required],
+      yourUsername: ['', Validators.required],
+      yourPassword: ['', Validators.required],
+      errorLabel: ''
+    });
     var room='signup';
     const url = `wss://fhc-websocket-bczybjppsq-ue.a.run.app?room=${room}`;
     this.socket = new WebSocket(url);
@@ -60,46 +66,17 @@ export class SignupComponent implements OnInit {
   }
 
   async register(): Promise<void> {
-    this.elementRefs ={
-      yourName: this.yourName,
-      yourEmail: this.yourEmail,
-      yourUsername: this.yourUsername,
-      yourPassword: this.yourPassword
-    };
-    var contentNoti = (this.notiContent.nativeElement as HTMLInputElement);
-    this.validateService.clearError(this.listElement, this.elementRefs);
-
-    
-    var yourName = (this.yourName.nativeElement as HTMLInputElement).value;
-    var yourEmail = (this.yourEmail.nativeElement as HTMLInputElement).value;
-    var yourUsername = (this.yourUsername.nativeElement as HTMLInputElement).value;
-    var yourPassword = (this.yourPassword.nativeElement as HTMLInputElement).value;
-
-    var checkInfo = true;
-    if (!yourName) {
-      (this.yourName.nativeElement as HTMLInputElement).style.borderColor = this.constantVariable.COLOR_ERROR;
-      checkInfo = false;
-    }
-
-    if (!yourEmail) {
-      (this.yourEmail.nativeElement as HTMLInputElement).style.borderColor = this.constantVariable.COLOR_ERROR;
-      checkInfo = false;
-    }
-
-    if (!yourUsername) {
-      (this.yourUsername.nativeElement as HTMLInputElement).style.borderColor = this.constantVariable.COLOR_ERROR;
-      checkInfo = false;
-    }
-
-    if (!yourPassword) {
-      (this.yourPassword.nativeElement as HTMLInputElement).style.borderColor = this.constantVariable.COLOR_ERROR;
-      checkInfo = false;
-    }
-
-    if (!checkInfo) {
-      this.validateService.printOutMessage('WARNING', 'Vui lòng nhập các thông tin còn thiếu.', contentNoti);
+    this.isSubmitted = true;
+    if (this.signupForm.invalid) {
       return;
     }
+
+    //this.validateService.clearError(this.listElement, this.elementRefs);
+    
+    var yourName = this.signupForm.controls['yourName'].value;
+    var yourEmail = this.signupForm.controls['yourEmail'].value;
+    var yourUsername = this.signupForm.controls['yourUsername'].value;
+    var yourPassword = this.signupForm.controls['yourPassword'].value;
 
     const sendModel = new SendModel();
     var userInformation = new UserInformationModel();
@@ -115,8 +92,7 @@ export class SignupComponent implements OnInit {
       userInformation.lastName = fullname[fullname.length - 1];
     } else if (fullname.length <= 1) {
       this.validateService.printMsg('WARNING', 'Tên phải có tối thiểu 2 chữ cái.');
-      (this.yourName.nativeElement as HTMLInputElement).style.borderColor = this.constantVariable.COLOR_ERROR;
-      checkInfo = false;
+      this.signupForm.get('yourName')?.setErrors({formatError: true});
       return;
     } else {
       userInformation.firstName = fullname[0];
@@ -150,7 +126,7 @@ export class SignupComponent implements OnInit {
       sendModel.model = userInformation;
   
       let resp = await new Promise<ReciveModel>((resolve) => {
-        this.httpClient.post<ReciveModel>(this.constantVariable.CONTENT_API_SERVER +'signup/register-user', sendModel).subscribe({
+        this.httpClient.post<ReciveModel>(this.constantVariable.CONTENT_API_SERVER +'jpa-regist-user/jpa-regist', sendModel).subscribe({
           next: (resp) => {
             resolve(resp);
           },
